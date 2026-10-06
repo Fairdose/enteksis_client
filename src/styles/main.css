@@ -441,7 +441,9 @@ textarea:focus-visible {
   gap: 2rem 4rem;
   align-items: start;
 }
-.service-copy h3 {
+.service-copy > h3 {
+  width: clamp(12rem, 22vw, 18rem);
+  max-width: 100%;
   margin: 0;
   font: 600 clamp(1.5rem, 3vw, 2.2rem) 'Manrope';
   letter-spacing: -0.04em;
