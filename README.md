@@ -40,6 +40,29 @@ Script her iki repoda da aynı içeriktedir ve aynı Compose projesini yönetir:
 Docker kullanmadan frontend geliştirmek için Node.js 24.12+ ve pnpm 12+ ile `pnpm install` ve
 `pnpm dev` kullanılabilir.
 
+## Testler
+
+Unit testleri ve statik kontroller:
+
+```sh
+pnpm install
+pnpm lint
+pnpm test:unit -- --run
+pnpm build
+```
+
+Playwright uçtan uca testleri gerçek Docker API ve PostgreSQL ile çalışır. Stack'i başlattıktan
+sonra Chromium'u ilk kullanımda kurup testleri çalıştırın:
+
+```sh
+./run.sh start
+pnpm exec playwright install chromium
+pnpm test:e2e
+```
+
+Testler masaüstünde Türkçe/İngilizce dil kalıcılığını, istemci doğrulamasını, gönderim ve API
+hatası durumlarını, gerçek veritabanına başarılı kaydı; mobilde menüyü ve yatay taşmayı kapsar.
+
 ## Mimari kararlar
 
 - Türkçe varsayılandır; İngilizce içerik dil düğmesiyle açılır.
@@ -79,7 +102,8 @@ src/
 
 ## Bilinen eksikler
 
-- Tarayıcılar arası görsel regresyon testi challenge süresi nedeniyle eklenmemiştir.
+- Playwright akışları Chromium masaüstü ve mobil cihaz emülasyonunda çalışır; Firefox, WebKit ve
+  piksel bazlı görsel regresyon challenge süresi nedeniyle kapsam dışıdır.
 - Windows'ta `.sh` dosyası PowerShell veya CMD tarafından doğrudan çalıştırılamaz; Git Bash ya da
   WSL kullanılmalıdır.
 

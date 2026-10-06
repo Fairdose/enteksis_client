@@ -6,7 +6,7 @@
 - Context7: Vue, Pinia, Vue Router, persisted-state, Docker Compose ve Docker'ın Vue/nginx
   dokümantasyon kontrolü
 - Vitest ve Vue Test Utils: form doğrulama, başarı ve hata durumları
-- Yerel tarayıcı doğrulaması: responsive görünüm ve gerçek Docker API form akışı
+- Playwright: masaüstü/mobil tarayıcı akışları ve gerçek Docker API form kaydı
 
 ## Kabul edilen ve değiştirilen öneriler
 
@@ -32,6 +32,10 @@
 - Docker Compose ile PostgreSQL ve API ayağa kaldırıldı; `/health` yanıtı kontrol edildi.
 - API'ye gerçek bir hizmet talebi gönderildi ve satır PostgreSQL içinde sorgulandı.
 - Form tarayıcıda dolduruldu; API `201` döndükten sonra başarı ekranının göründüğü doğrulandı.
+- Playwright ile dil tercihi kalıcılığı, dört alanın istemci doğrulaması, gönderiliyor durumu,
+  kontrollü API hatası, mobil menü ve yatay taşma otomatik olarak sınandı.
+- Başarılı Playwright isteğinin `201 Created` aldığı ve kaydın Docker PostgreSQL tablosunda
+  bulunduğu ayrıca doğrulandı.
 
 ## Görev dağılımı
 
