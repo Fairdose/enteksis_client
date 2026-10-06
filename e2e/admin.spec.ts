@@ -24,8 +24,8 @@ test('admin signs in, inspects a request and prepares a mailto reply', async ({ 
   await page.getByRole('button', { name: 'Giriş yap' }).click()
   await expect(page.getByRole('alert')).toHaveText('Yönetici erişimi gerekli.')
 
-  await page.getByLabel('Kullanıcı adı').fill(process.env.E2E_ADMIN_USERNAME || 'admin')
-  await page.getByLabel('Şifre').fill(process.env.E2E_ADMIN_PASSWORD || 'enteksis-local-admin')
+  await page.getByLabel('Kullanıcı adı').fill('admin')
+  await page.getByLabel('Şifre').fill('123456admin')
   await page.getByRole('button', { name: 'Giriş yap' }).click()
 
   await expect(page).toHaveURL(/\/admin\/requests$/)

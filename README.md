@@ -27,9 +27,8 @@ Uygulama `http://localhost:5173`, API `http://localhost:8080`, PostgreSQL ise
 `localhost:5432` adresinde çalışır. Formda
 başarı mesajı yalnızca API PostgreSQL kaydını tamamlayıp `201 Created` döndürdüğünde gösterilir.
 
-Gönderilen talepleri incelemek için `http://localhost:5173/admin` adresini açın. Varsayılan yerel
-giriş bilgileri `admin` / `enteksis-local-admin` şeklindedir ve backend `.env` dosyasındaki
-`ADMIN_USERNAME` ile `ADMIN_PASSWORD` değerleriyle değiştirilmelidir.
+Gönderilen talepleri incelemek için `http://localhost:5173/admin` adresini açın. Challenge için
+statik giriş bilgileri kullanıcı adı `admin`, şifre `123456admin` şeklindedir.
 
 Script her iki repoda da aynı içeriktedir ve aynı Compose projesini yönetir:
 
