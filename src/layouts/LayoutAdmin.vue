@@ -16,9 +16,9 @@ function logout() {
 <template>
   <div class="admin-shell">
     <header class="admin-header">
-      <RouterLink class="brand" to="/" aria-label="Enteksis ana sayfa">
+      <RouterLink class="brand" to="/" aria-label="Ent Challange ana sayfa">
         <BrandMark />
-        <span>enteksis</span>
+        <span>ent-challange</span>
       </RouterLink>
       <nav v-if="admin.isAuthenticated" aria-label="Yönetim menüsü">
         <RouterLink :to="{ name: 'admin-requests' }">Talepler</RouterLink>

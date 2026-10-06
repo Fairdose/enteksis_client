@@ -22,9 +22,9 @@ function closeMenu() {
 <template>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Enteksis ana sayfa" @click="closeMenu">
+      <a class="brand" href="#top" aria-label="Ent Challange ana sayfa" @click="closeMenu">
         <BrandMark />
-        <span>enteksis</span>
+        <span>ent-challange</span>
       </a>
 
       <button

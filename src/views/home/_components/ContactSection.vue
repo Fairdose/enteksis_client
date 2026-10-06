@@ -12,7 +12,7 @@ const { copy } = useCopy()
         <p class="eyebrow eyebrow-dark"><span></span>{{ copy.form.eyebrow }}</p>
         <h2>{{ copy.form.title }}</h2>
         <p>{{ copy.form.description }}</p>
-        <a href="mailto:hello@enteksis.com">hello@enteksis.com</a>
+        <a href="mailto:hello@fairdose.net">hello@fairdose.net</a>
       </div>
       <LeadForm />
     </div>

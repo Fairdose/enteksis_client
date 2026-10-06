@@ -9,9 +9,9 @@ const { copy } = useCopy()
   <footer class="site-footer">
     <div class="container footer-main">
       <div class="footer-brand">
-        <a class="brand brand-light" href="#top" aria-label="Enteksis ana sayfa">
+        <a class="brand brand-light" href="#top" aria-label="Ent Challange ana sayfa">
           <BrandMark />
-          <span>enteksis</span>
+          <span>ent-challange</span>
         </a>
         <p>{{ copy.footer.statement }}</p>
       </div>
@@ -23,12 +23,12 @@ const { copy } = useCopy()
       </div>
       <div class="footer-column">
         <strong>{{ copy.footer.contact }}</strong>
-        <a href="mailto:hello@enteksis.com">hello@enteksis.com</a>
+        <a href="mailto:hello@fairdose.net">hello@fairdose.net</a>
         <span>İstanbul, Türkiye</span>
       </div>
     </div>
     <div class="container footer-bottom">
-      <span>© {{ new Date().getFullYear() }} Enteksis. {{ copy.footer.rights }}</span>
+      <span>© {{ new Date().getFullYear() }} Ent Challange. {{ copy.footer.rights }}</span>
       <span>Design · Development · Strategy</span>
     </div>
   </footer>

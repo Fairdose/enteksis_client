@@ -31,8 +31,8 @@ watch(
   () => String(route.params.id || ''),
   async (id) => {
     if (!id || !(await admin.loadRequest(id)) || !admin.currentRequest) return
-    subject.value = `Enteksis | ${serviceLabels[admin.currentRequest.serviceType] || 'Hizmet'} talebiniz`
-    message.value = `Merhaba ${admin.currentRequest.name},\n\nTalebiniz için teşekkür ederiz.\n\n\n\nİyi çalışmalar,\nEnteksis`
+    subject.value = `Ent Challange | ${serviceLabels[admin.currentRequest.serviceType] || 'Hizmet'} talebiniz`
+    message.value = `Merhaba ${admin.currentRequest.name},\n\nTalebiniz için teşekkür ederiz.\n\n\n\nİyi çalışmalar,\nEnt Challange`
   },
   { immediate: true },
 )

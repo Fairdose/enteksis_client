@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 import type { AdminState, ServiceRequest } from './types'
 
-const sessionKey = 'enteksis-admin-authorization'
+export const adminSessionKey = 'ent-challange-admin-authorization'
 const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080').replace(/\/$/, '')
 
 interface ErrorBody {
@@ -18,7 +18,7 @@ function basicAuthorization(username: string, password: string): string {
 
 export const useAdminStore = defineStore('admin', {
   state: (): AdminState => ({
-    authorization: window.sessionStorage.getItem(sessionKey) || '',
+    authorization: window.sessionStorage.getItem(adminSessionKey) || '',
     requests: [],
     currentRequest: null,
     listState: 'idle',
@@ -31,7 +31,7 @@ export const useAdminStore = defineStore('admin', {
   actions: {
     async login(username: string, password: string): Promise<boolean> {
       this.authorization = basicAuthorization(username.trim(), password)
-      window.sessionStorage.setItem(sessionKey, this.authorization)
+      window.sessionStorage.setItem(adminSessionKey, this.authorization)
       const authenticated = await this.loadRequests()
       if (!authenticated) {
         const message = this.error
@@ -47,7 +47,7 @@ export const useAdminStore = defineStore('admin', {
       this.listState = 'idle'
       this.detailState = 'idle'
       this.error = ''
-      window.sessionStorage.removeItem(sessionKey)
+      window.sessionStorage.removeItem(adminSessionKey)
     },
     async loadRequests(): Promise<boolean> {
       this.listState = 'loading'
@@ -87,7 +87,7 @@ export const useAdminStore = defineStore('admin', {
       if (!response.ok) {
         if (response.status === 401) {
           this.authorization = ''
-          window.sessionStorage.removeItem(sessionKey)
+          window.sessionStorage.removeItem(adminSessionKey)
         }
         throw new Error(body.error || 'İstek tamamlanamadı.')
       }

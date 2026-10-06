@@ -1,6 +1,6 @@
-# Enteksis Client
+# Ent Challange Client
 
-Enteksis için Türkçe öncelikli, responsive ve erişilebilir hizmet landing page'i. Vue 3,
+Ent Challange için Türkçe öncelikli, responsive ve erişilebilir hizmet landing page'i. Vue 3,
 TypeScript, Pinia ve Vue Router ile geliştirilmiştir.
 
 ## Gereksinimler

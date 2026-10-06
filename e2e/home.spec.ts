@@ -9,6 +9,8 @@ async function openClean(page: Page, path = '/') {
 test('loads in Turkish and persists the selected language', async ({ page }) => {
   await openClean(page)
 
+  await expect(page).toHaveTitle('Ent Challange — Dijital ürün stüdyosu')
+  await expect(page.getByLabel('Ent Challange ana sayfa').first()).toContainText('ent-challange')
   await expect(page.locator('html')).toHaveAttribute('lang', 'tr')
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Fikrinizi')
 

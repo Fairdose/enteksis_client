@@ -26,6 +26,8 @@
   Giriş bilgileri kullanıcı yönlendirmesiyle statik `admin` / `123456admin` olarak belirlendi.
   SMTP/Mailpit önerisi kullanıcı yönlendirmesiyle kaldırıldı; cevap metnini güvenli biçimde encode
   eden ve varsayılan posta uygulamasını açan `mailto:` yaklaşımı uygulandı.
+- Ürün adı kullanıcı yönlendirmesiyle `Ent Challange` olarak değiştirildi; arayüz metinleri,
+  tarayıcı metadatası ve oturum anahtarı aynı kimlik altında birleştirildi.
 
 ## Doğrulama kaydı
 
