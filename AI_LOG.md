@@ -22,6 +22,9 @@
   kapsam dışı domain katmanları eklenmedi.
 - GitHub Pages teslim yaklaşımı kullanıcı kararıyla kaldırıldı. Client, API ve PostgreSQL tek
   Compose projesinde; iki repodaki aynı platform-bağımsız Bash giriş noktasıyla çalıştırıldı.
+- Admin için `/admin` altında nested layout, giriş, talep listesi ve detay route'ları eklendi.
+  SMTP/Mailpit önerisi kullanıcı yönlendirmesiyle kaldırıldı; cevap metnini güvenli biçimde encode
+  eden ve varsayılan posta uygulamasını açan `mailto:` yaklaşımı uygulandı.
 
 ## Doğrulama kaydı
 
@@ -36,6 +39,10 @@
   kontrollü API hatası, mobil menü ve yatay taşma otomatik olarak sınandı.
 - Başarılı Playwright isteğinin `201 Created` aldığı ve kaydın Docker PostgreSQL tablosunda
   bulunduğu ayrıca doğrulandı.
+- İlk admin Playwright akışında hatalı girişten sonra logout işleminin hata mesajını da temizlediği
+  görüldü; mesaj korunarak düzeltildi.
+- Playwright'ın yedi senaryosu; yanlış/doğru admin girişi, talep arama ve detay görüntüleme ile
+  konu/gövde içeren URL-encode edilmiş `mailto:` bağlantısını da kapsayacak şekilde geçti.
 
 ## Görev dağılımı
 

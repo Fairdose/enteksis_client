@@ -21,3 +21,29 @@ test('mobile navigation opens without horizontal overflow', async ({ page }) => 
   )
   expect(hasHorizontalOverflow).toBe(false)
 })
+
+test('admin list and detail remain usable on mobile', async ({ page, request }) => {
+  const email = `admin-mobile-${Date.now()}@example.com`
+  const createResponse = await request.post('http://localhost:8080/api/v1/requests', {
+    data: {
+      name: 'Mobil Admin Testi',
+      email,
+      serviceType: 'web-design',
+      description: 'Mobil admin görünümünde incelenecek test talebi.',
+    },
+  })
+  expect(createResponse.status()).toBe(201)
+
+  await page.goto('/admin')
+  await page.getByLabel('Kullanıcı adı').fill(process.env.E2E_ADMIN_USERNAME || 'admin')
+  await page.getByLabel('Şifre').fill(process.env.E2E_ADMIN_PASSWORD || 'enteksis-local-admin')
+  await page.getByRole('button', { name: 'Giriş yap' }).click()
+  await page.getByLabel('Talep ara').fill(email)
+  await page.getByRole('link', { name: new RegExp(`Mobil Admin Testi ${email}`) }).click()
+
+  await expect(page.getByRole('heading', { name: 'Mobil Admin Testi' })).toBeVisible()
+  const hasHorizontalOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth > window.innerWidth,
+  )
+  expect(hasHorizontalOverflow).toBe(false)
+})

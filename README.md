@@ -27,6 +27,10 @@ Uygulama `http://localhost:5173`, API `http://localhost:8080`, PostgreSQL ise
 `localhost:5432` adresinde çalışır. Formda
 başarı mesajı yalnızca API PostgreSQL kaydını tamamlayıp `201 Created` döndürdüğünde gösterilir.
 
+Gönderilen talepleri incelemek için `http://localhost:5173/admin` adresini açın. Varsayılan yerel
+giriş bilgileri `admin` / `enteksis-local-admin` şeklindedir ve backend `.env` dosyasındaki
+`ADMIN_USERNAME` ile `ADMIN_PASSWORD` değerleriyle değiştirilmelidir.
+
 Script her iki repoda da aynı içeriktedir ve aynı Compose projesini yönetir:
 
 ```sh
@@ -61,13 +65,16 @@ pnpm test:e2e
 ```
 
 Testler masaüstünde Türkçe/İngilizce dil kalıcılığını, istemci doğrulamasını, gönderim ve API
-hatası durumlarını, gerçek veritabanına başarılı kaydı; mobilde menüyü ve yatay taşmayı kapsar.
+hatası durumlarını, gerçek veritabanına başarılı kaydı; admin giriş/liste/detay/`mailto:` akışını;
+mobilde menüyü ve yatay taşmayı kapsar.
 
 ## Mimari kararlar
 
 - Türkçe varsayılandır; İngilizce içerik dil düğmesiyle açılır.
 - Router domain bazlıdır. `public.route.ts`, `layout-view` named view içine `LayoutPublic`, layout
   ise `public-view` içine nested `HomeView` render eder.
+- Admin route'ları `/admin` altında nested yapıdadır. `LayoutAdmin`, `admin-view` içine giriş,
+  talep listesi ve talep detayı view'larını render eder.
 - `HomeView` yalnızca feature section'larını orkestre eder. Home'a özel parçalar
   `views/home/_components`, tekrar kullanılabilir uygulama bileşenleri `components`, layout'lar
   `layouts` altında tutulur.
@@ -86,8 +93,9 @@ src/
   layouts/LayoutPublic.vue
   router/
     index.ts
-    routes/{_entry,public.route}.ts
-  store/preferences/{index,types}.ts
+    routes/{_entry,admin.route,public.route}.ts
+  store/{admin,preferences}/{index,types}.ts
+  views/admin/{login,requests}/
   views/home/
     HomeView.vue
     _components/
@@ -106,6 +114,8 @@ src/
   piksel bazlı görsel regresyon challenge süresi nedeniyle kapsam dışıdır.
 - Windows'ta `.sh` dosyası PowerShell veya CMD tarafından doğrudan çalıştırılamaz; Git Bash ya da
   WSL kullanılmalıdır.
+- Admin girişi yerel challenge ortamında HTTP Basic kullanır. `mailto:` yanıtı varsayılan e-posta
+  uygulamasını açar; uygulama mesajın gerçekten gönderildiğini doğrulayamaz veya durumunu saklayamaz.
 
 Herhangi bir hazır landing page şablonu kullanılmadı. Tasarım ve uygulama bu challenge için
 sıfırdan oluşturuldu.

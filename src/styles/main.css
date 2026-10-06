@@ -778,6 +778,219 @@ textarea:focus-visible {
   font-size: 0.7rem;
 }
 
+.admin-shell {
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 90% 0, rgba(49, 91, 234, 0.12), transparent 30rem),
+    var(--paper);
+}
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 5rem;
+  padding-inline: max(1.25rem, calc((100vw - 1180px) / 2));
+  border-bottom: 1px solid var(--line);
+  background: rgba(251, 250, 247, 0.88);
+  backdrop-filter: blur(18px);
+}
+.admin-header .brand {
+  color: var(--ink);
+}
+.admin-header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.admin-header nav a {
+  font-weight: 700;
+  text-decoration: none;
+}
+.admin-header nav button,
+.admin-secondary-button {
+  padding: 0;
+  border: 0;
+  color: var(--blue);
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+.admin-main {
+  width: min(100% - 2.5rem, 1180px);
+  margin-inline: auto;
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+.admin-login {
+  display: grid;
+  grid-template-columns: 1fr minmax(20rem, 28rem);
+  align-items: center;
+  gap: clamp(3rem, 8vw, 8rem);
+  min-height: calc(100vh - 11rem);
+}
+.admin-login-copy h1,
+.admin-page-heading h1 {
+  margin: 0;
+  font: 600 clamp(2.6rem, 6vw, 5.5rem) 'Manrope';
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+.admin-login-copy > p:last-child {
+  max-width: 32rem;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+.admin-kicker {
+  margin: 0 0 1rem;
+  color: var(--blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.admin-panel {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--line);
+  background: var(--paper-light);
+  box-shadow: 0 24px 70px rgba(20, 24, 32, 0.08);
+}
+.admin-login-form,
+.admin-reply-form {
+  display: grid;
+  gap: 1.25rem;
+}
+.admin-alert {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  color: #8d241d;
+  background: #fff0ed;
+  font-size: 0.9rem;
+}
+.admin-page {
+  display: grid;
+  gap: 2rem;
+}
+.admin-page-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.admin-page-heading h1 {
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+}
+.admin-count,
+.admin-service {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  color: #2140a6;
+  background: #e8edff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.admin-search {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 31rem;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.admin-search input {
+  min-height: 3.3rem;
+  padding-inline: 1rem;
+  border: 1px solid var(--line);
+  background: var(--paper-light);
+}
+.admin-state {
+  display: grid;
+  min-height: 12rem;
+  place-content: center;
+  gap: 1rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+.admin-request-list {
+  border-top: 1px solid var(--line);
+}
+.admin-request-row {
+  display: grid;
+  grid-template-columns: minmax(13rem, 1.2fr) minmax(10rem, 0.8fr) minmax(10rem, auto) 1.5rem;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.admin-request-row:hover {
+  background: var(--paper-light);
+}
+.admin-request-row > div {
+  display: grid;
+  gap: 0.35rem;
+}
+.admin-request-row strong {
+  font: 600 1.1rem 'Manrope';
+}
+.admin-request-row div span,
+.admin-request-row time {
+  color: var(--ink-soft);
+  font-size: 0.83rem;
+}
+.admin-back-link {
+  width: fit-content;
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+.admin-detail-heading a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--blue);
+}
+.admin-detail-heading time {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+.admin-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(22rem, 1.15fr);
+  align-items: start;
+  gap: 2rem;
+}
+.admin-request-detail {
+  display: grid;
+  gap: 0.75rem;
+}
+.admin-request-detail span {
+  margin-top: 1rem;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.admin-request-detail p {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+.admin-reply-form h2 {
+  margin: 0;
+  font: 600 1.8rem 'Manrope';
+}
+.admin-reply-form > div:first-child > p:last-child {
+  color: var(--ink-soft);
+}
+.button.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -785,6 +998,20 @@ textarea:focus-visible {
 }
 
 @media (max-width: 900px) {
+	.admin-login,
+	.admin-detail-grid {
+		grid-template-columns: 1fr;
+	}
+	.admin-login {
+		min-height: auto;
+	}
+	.admin-request-row {
+		grid-template-columns: 1fr auto;
+	}
+	.admin-request-row > .admin-service,
+	.admin-request-row > time {
+		grid-column: 1;
+	}
   .menu-button {
     display: block;
   }
@@ -856,6 +1083,24 @@ textarea:focus-visible {
 }
 
 @media (max-width: 620px) {
+	.admin-header {
+		padding-inline: 0.75rem;
+	}
+	.admin-header nav {
+		gap: 0.8rem;
+		font-size: 0.85rem;
+	}
+	.admin-main {
+		width: min(100% - 1.5rem, 1180px);
+		padding-block: 2.5rem;
+	}
+	.admin-page-heading {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+	.admin-request-row {
+		padding-inline: 0;
+	}
   .container {
     width: min(100% - 1.5rem, 1180px);
   }
