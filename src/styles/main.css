@@ -65,11 +65,14 @@ a {
 }
 
 .site-header {
-  position: absolute;
+  position: sticky;
   z-index: 20;
-  inset: 0 0 auto;
+  top: 0;
   padding-block: 1.4rem;
   color: var(--white);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(20, 26, 43, 0.94);
+  backdrop-filter: blur(18px);
 }
 .header-inner,
 .brand,
@@ -786,6 +789,9 @@ textarea:focus-visible {
     var(--paper);
 }
 .admin-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
