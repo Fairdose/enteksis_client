@@ -417,7 +417,7 @@ textarea:focus-visible {
 }
 .service-card {
   display: grid;
-  grid-template-columns: 0.25fr 1.5fr auto;
+  grid-template-columns: minmax(2rem, 0.25fr) minmax(0, 1.5fr) auto;
   gap: 2rem;
   align-items: center;
   padding: 2.4rem 0;
@@ -437,7 +437,7 @@ textarea:focus-visible {
 }
 .service-copy {
   display: grid;
-  grid-template-columns: 0.75fr 1.25fr;
+  grid-template-columns: minmax(12rem, 1fr) auto;
   gap: 2rem 4rem;
   align-items: start;
 }
@@ -446,8 +446,9 @@ textarea:focus-visible {
   font: 600 clamp(1.5rem, 3vw, 2.2rem) 'Manrope';
   letter-spacing: -0.04em;
 }
-.service-copy p {
-  max-width: 34rem;
+.service-copy > p {
+  width: clamp(20rem, 40vw, 34rem);
+  max-width: 100%;
   margin: 0;
   color: var(--ink-soft);
   line-height: 1.65;
