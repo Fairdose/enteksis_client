@@ -23,13 +23,15 @@
 - GitHub Pages teslim yaklaşımı kullanıcı kararıyla kaldırıldı. Client, API ve PostgreSQL tek
   Compose projesinde; iki repodaki aynı platform-bağımsız Bash giriş noktasıyla çalıştırıldı.
 - Admin için `/admin` altında nested layout, giriş, talep listesi ve detay route'ları eklendi.
-  Giriş bilgileri kullanıcı yönlendirmesiyle statik `admin` / `123456admin` olarak belirlendi.
+  Başlangıçta statik belirlenen giriş bilgileri son güvenlik kontrolünde environment secret'a taşındı.
   SMTP/Mailpit önerisi kullanıcı yönlendirmesiyle kaldırıldı; cevap metnini güvenli biçimde encode
   eden ve varsayılan posta uygulamasını açan `mailto:` yaklaşımı uygulandı.
 - Ürün adı kullanıcı yönlendirmesiyle `Ent Challange` olarak değiştirildi; arayüz metinleri,
   tarayıcı metadatası ve oturum anahtarı aynı kimlik altında birleştirildi.
 - Admin talepleri durum filtreleme, otomatik okundu işareti, açık cevaplandı işlemi ve onaylı silme
   ile CRUD akışına genişletildi. `mailto:` açılmasının gönderim kanıtı olmadığı özellikle korundu.
+- Admin giriş alanı e-posta semantiğine geçirildi; gerçek kimlik bilgileri test kaynaklarından
+  çıkarılıp çalışma ortamından alınacak şekilde düzenlendi.
 
 ## Doğrulama kaydı
 

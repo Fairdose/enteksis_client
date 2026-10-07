@@ -7,13 +7,13 @@ import { useAdminStore } from '~store/admin'
 const admin = useAdminStore()
 const route = useRoute()
 const router = useRouter()
-const username = ref('')
+const email = ref('')
 const password = ref('')
 const submitting = ref(false)
 
 async function submit() {
   submitting.value = true
-  const authenticated = await admin.login(username.value, password.value)
+  const authenticated = await admin.login(email.value, password.value)
   submitting.value = false
   if (authenticated) {
     const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : undefined
@@ -31,11 +31,12 @@ async function submit() {
     </div>
     <form class="admin-panel admin-login-form" @submit.prevent="submit">
       <div class="field-group">
-        <label for="admin-username">Kullanıcı adı</label>
+        <label for="admin-email">E-posta</label>
         <input
-          id="admin-username"
-          v-model="username"
+          id="admin-email"
+          v-model="email"
           name="username"
+          type="email"
           autocomplete="username"
           required
         />

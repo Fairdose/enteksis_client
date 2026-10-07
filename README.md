@@ -14,6 +14,8 @@ TypeScript, Pinia ve Vue Router ile geliştirilmiştir.
 Client, API ve PostgreSQL'i tek komutla başlatın:
 
 ```sh
+cp ../enteksis_backend/.env.example ../enteksis_backend/.env
+# .env içindeki admin kimlik bilgilerini teslim kanalındaki değerlerle değiştirin.
 ./run.sh
 ```
 
@@ -27,8 +29,8 @@ Uygulama `http://localhost:5173`, API `http://localhost:8080`, PostgreSQL ise
 `localhost:5432` adresinde çalışır. Formda
 başarı mesajı yalnızca API PostgreSQL kaydını tamamlayıp `201 Created` döndürdüğünde gösterilir.
 
-Gönderilen talepleri incelemek için `http://localhost:5173/admin` adresini açın. Challenge için
-statik giriş bilgileri kullanıcı adı `admin`, şifre `123456admin` şeklindedir.
+Gönderilen talepleri incelemek için `http://localhost:5173/admin` adresini açın. Admin kimlik
+bilgileri backend `.env` dosyasından alınır ve teslim kanalıyla ayrıca paylaşılır.
 Admin ekranında talepler durumlarına göre filtrelenebilir; detay açıldığında `Okundu` olur,
 `Cevaplandı` olarak işaretlenebilir veya onay alınarak kalıcı biçimde silinebilir.
 
@@ -62,6 +64,7 @@ sonra Chromium'u ilk kullanımda kurup testleri çalıştırın:
 ```sh
 ./run.sh start
 pnpm exec playwright install chromium
+set -a; source ../enteksis_backend/.env; set +a
 pnpm test:e2e
 ```
 

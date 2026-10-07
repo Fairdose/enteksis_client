@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test'
 
+import { adminCredentials } from './support/admin'
+
 test('mobile navigation opens without horizontal overflow', async ({ page }) => {
   await page.addInitScript(() => window.localStorage.clear())
   await page.goto('/')
@@ -35,8 +37,8 @@ test('admin list and detail remain usable on mobile', async ({ page, request }) 
   expect(createResponse.status()).toBe(201)
 
   await page.goto('/admin')
-  await page.getByLabel('Kullanıcı adı').fill('admin')
-  await page.getByLabel('Şifre').fill('123456admin')
+  await page.getByLabel('E-posta').fill(adminCredentials.username)
+  await page.getByLabel('Şifre').fill(adminCredentials.password)
   await page.getByRole('button', { name: 'Giriş yap' }).click()
   await page.getByLabel('Talep ara').fill(email)
   await page.getByRole('link', { name: new RegExp(email) }).click()

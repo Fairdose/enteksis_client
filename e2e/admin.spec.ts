@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test'
 
+import { adminCredentials } from './support/admin'
+
 test('admin signs in, inspects a request and prepares a mailto reply', async ({ page, request }) => {
   const email = `admin-flow-${Date.now()}@example.com`
   const createResponse = await request.post('http://localhost:8080/api/v1/requests', {
@@ -19,13 +21,13 @@ test('admin signs in, inspects a request and prepares a mailto reply', async ({ 
   await expect(page).toHaveURL(/\/admin(?:\?.*)?$/)
   await expect(page.getByRole('heading', { name: 'Hizmet taleplerini yönetin.' })).toBeVisible()
 
-  await page.getByLabel('Kullanıcı adı').fill('yanlis')
+  await page.getByLabel('E-posta').fill('wrong@example.invalid')
   await page.getByLabel('Şifre').fill('yanlis')
   await page.getByRole('button', { name: 'Giriş yap' }).click()
   await expect(page.getByRole('alert')).toHaveText('Yönetici erişimi gerekli.')
 
-  await page.getByLabel('Kullanıcı adı').fill('admin')
-  await page.getByLabel('Şifre').fill('123456admin')
+  await page.getByLabel('E-posta').fill(adminCredentials.username)
+  await page.getByLabel('Şifre').fill(adminCredentials.password)
   await page.getByRole('button', { name: 'Giriş yap' }).click()
 
   await expect(page).toHaveURL(/\/admin\/requests$/)
