@@ -425,12 +425,9 @@ textarea:focus-visible {
   align-items: center;
   padding: 2.4rem 0;
   border-bottom: 1px solid var(--line);
-  transition:
-    padding 0.25s ease,
-    background 0.25s ease;
+  transition: background 0.25s ease;
 }
 .service-card:hover {
-  padding-inline: 1.5rem;
   background: var(--paper);
 }
 .service-number {
@@ -1229,9 +1226,6 @@ textarea:focus-visible {
     grid-template-columns: 2rem 1fr;
     align-items: start;
     gap: 1rem;
-  }
-  .service-card:hover {
-    padding-inline: 0.5rem;
   }
   .circle-button {
     grid-column: 2;

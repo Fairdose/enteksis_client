@@ -72,6 +72,9 @@
   renk kontrastı buldu. İlgili renkler AA eşiğini geçecek şekilde yükseltildi ve public sayfa ile
   admin giriş taramaları ihlalsiz tekrarlandı. Dokuz masaüstü senaryosunun üç motor çalıştırması ve
   iki Chromium mobil senaryosu toplam 29 başarılı tarayıcı çalıştırması oluşturdu.
+- Hizmet kartında hover sırasında yatay padding değişiminin başlık geometrisini kaydırdığı görüldü.
+  Geometri değiştiren animasyon kaldırılıp yalnız arka plan geçişi korundu; başlığın bounding box
+  değerlerinin hover öncesi ve sonrasında aynı kaldığı Playwright testiyle güvenceye alındı.
 
 ## Görev dağılımı
 
