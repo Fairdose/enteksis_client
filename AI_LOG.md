@@ -28,6 +28,8 @@
   eden ve varsayılan posta uygulamasını açan `mailto:` yaklaşımı uygulandı.
 - Ürün adı kullanıcı yönlendirmesiyle `Ent Challange` olarak değiştirildi; arayüz metinleri,
   tarayıcı metadatası ve oturum anahtarı aynı kimlik altında birleştirildi.
+- Admin talepleri durum filtreleme, otomatik okundu işareti, açık cevaplandı işlemi ve onaylı silme
+  ile CRUD akışına genişletildi. `mailto:` açılmasının gönderim kanıtı olmadığı özellikle korundu.
 
 ## Doğrulama kaydı
 
@@ -46,6 +48,8 @@
   görüldü; mesaj korunarak düzeltildi.
 - Playwright'ın yedi senaryosu; yanlış/doğru admin girişi, talep arama ve detay görüntüleme ile
   konu/gövde içeren URL-encode edilmiş `mailto:` bağlantısını da kapsayacak şekilde geçti.
+- Admin Playwright akışı kalıcı `Okundu`/`Cevaplandı` geçişini ve onay sonrası silmeyi kapsayacak
+  şekilde genişletildi; masaüstü ve mobil toplam dokuz Playwright senaryosu geçti.
 
 ## Görev dağılımı
 

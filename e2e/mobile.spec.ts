@@ -39,7 +39,7 @@ test('admin list and detail remain usable on mobile', async ({ page, request }) 
   await page.getByLabel('Şifre').fill('123456admin')
   await page.getByRole('button', { name: 'Giriş yap' }).click()
   await page.getByLabel('Talep ara').fill(email)
-  await page.getByRole('link', { name: new RegExp(`Mobil Admin Testi ${email}`) }).click()
+  await page.getByRole('link', { name: new RegExp(email) }).click()
 
   await expect(page.getByRole('heading', { name: 'Mobil Admin Testi' })).toBeVisible()
   const hasHorizontalOverflow = await page.evaluate(

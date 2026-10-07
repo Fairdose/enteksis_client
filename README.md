@@ -29,6 +29,8 @@ başarı mesajı yalnızca API PostgreSQL kaydını tamamlayıp `201 Created` d�
 
 Gönderilen talepleri incelemek için `http://localhost:5173/admin` adresini açın. Challenge için
 statik giriş bilgileri kullanıcı adı `admin`, şifre `123456admin` şeklindedir.
+Admin ekranında talepler durumlarına göre filtrelenebilir; detay açıldığında `Okundu` olur,
+`Cevaplandı` olarak işaretlenebilir veya onay alınarak kalıcı biçimde silinebilir.
 
 Script her iki repoda da aynı içeriktedir ve aynı Compose projesini yönetir:
 
@@ -114,7 +116,8 @@ src/
 - Windows'ta `.sh` dosyası PowerShell veya CMD tarafından doğrudan çalıştırılamaz; Git Bash ya da
   WSL kullanılmalıdır.
 - Admin girişi yerel challenge ortamında HTTP Basic kullanır. `mailto:` yanıtı varsayılan e-posta
-  uygulamasını açar; uygulama mesajın gerçekten gönderildiğini doğrulayamaz veya durumunu saklayamaz.
+  uygulamasını açar; uygulama mesajın gerçekten gönderildiğini doğrulayamaz. Bu nedenle cevap durumu
+  yönetici tarafından açıkça işaretlenir.
 
 Herhangi bir hazır landing page şablonu kullanılmadı. Tasarım ve uygulama bu challenge için
 sıfırdan oluşturuldu.

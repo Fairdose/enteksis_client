@@ -1,19 +1,28 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
-import { useAdminStore } from '~store/admin'
+import { useAdminStore, type RequestStatus } from '~store/admin'
 
 const admin = useAdminStore()
 const route = useRoute()
+const router = useRouter()
 const subject = ref('')
 const message = ref('')
+const mutationPending = ref(false)
+const mutationError = ref('')
 
 const serviceLabels: Record<string, string> = {
   'web-design': 'Web tasarım',
   'software-development': 'Yazılım geliştirme',
   'digital-consulting': 'Dijital danışmanlık',
   'support-maintenance': 'Destek ve bakım',
+}
+
+const statusLabels: Record<RequestStatus, string> = {
+  new: 'Yeni',
+  read: 'Okundu',
+  replied: 'Cevaplandı',
 }
 
 const dateFormatter = new Intl.DateTimeFormat('tr-TR', {
@@ -27,12 +36,41 @@ const mailtoHref = computed(() => {
   return `mailto:${request.email}?subject=${encodeURIComponent(subject.value)}&body=${encodeURIComponent(message.value)}`
 })
 
+async function setStatus(status: RequestStatus) {
+  const request = admin.currentRequest
+  if (!request || request.status === status) return
+  mutationPending.value = true
+  mutationError.value = ''
+  try {
+    await admin.updateRequestStatus(request.id, status)
+  } catch (error) {
+    mutationError.value = error instanceof Error ? error.message : 'Talep durumu güncellenemedi.'
+  } finally {
+    mutationPending.value = false
+  }
+}
+
+async function deleteRequest() {
+  const request = admin.currentRequest
+  if (!request || !window.confirm('Bu talep kalıcı olarak silinsin mi?')) return
+  mutationPending.value = true
+  mutationError.value = ''
+  try {
+    await admin.deleteRequest(request.id)
+    await router.push({ name: 'admin-requests' })
+  } catch (error) {
+    mutationError.value = error instanceof Error ? error.message : 'Talep silinemedi.'
+    mutationPending.value = false
+  }
+}
+
 watch(
   () => String(route.params.id || ''),
   async (id) => {
     if (!id || !(await admin.loadRequest(id)) || !admin.currentRequest) return
     subject.value = `Ent Challange | ${serviceLabels[admin.currentRequest.serviceType] || 'Hizmet'} talebiniz`
     message.value = `Merhaba ${admin.currentRequest.name},\n\nTalebiniz için teşekkür ederiz.\n\n\n\nİyi çalışmalar,\nEnt Challange`
+    if (admin.currentRequest.status === 'new') await setStatus('read')
   },
   { immediate: true },
 )
@@ -59,6 +97,32 @@ watch(
           {{ dateFormatter.format(new Date(admin.currentRequest.createdAt)) }}
         </time>
       </div>
+
+      <div class="admin-lifecycle" aria-label="Talep işlemleri">
+        <span class="admin-status" :data-status="admin.currentRequest.status">
+          {{ statusLabels[admin.currentRequest.status] }}
+        </span>
+        <button
+          class="admin-secondary-button"
+          type="button"
+          :disabled="mutationPending || admin.currentRequest.status === 'new'"
+          @click="setStatus('new')"
+        >
+          Yeni olarak işaretle
+        </button>
+        <button
+          class="admin-secondary-button"
+          type="button"
+          :disabled="mutationPending || admin.currentRequest.status === 'read'"
+          @click="setStatus('read')"
+        >
+          Okundu olarak işaretle
+        </button>
+        <button class="admin-danger-button" type="button" :disabled="mutationPending" @click="deleteRequest">
+          Talebi sil
+        </button>
+      </div>
+      <p v-if="mutationError" class="admin-alert" role="alert">{{ mutationError }}</p>
 
       <div class="admin-detail-grid">
         <article class="admin-panel admin-request-detail">
@@ -90,6 +154,14 @@ watch(
           >
             E-posta uygulamasını aç
           </a>
+          <button
+            class="admin-secondary-button admin-replied-button"
+            type="button"
+            :disabled="mutationPending || admin.currentRequest.status === 'replied'"
+            @click="setStatus('replied')"
+          >
+            Cevaplandı olarak işaretle
+          </button>
         </form>
       </div>
     </template>

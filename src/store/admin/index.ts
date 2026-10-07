@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-import type { AdminState, ServiceRequest } from './types'
+import type { AdminState, RequestStatus, ServiceRequest } from './types'
 
 export const adminSessionKey = 'ent-challange-admin-authorization'
 const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080').replace(/\/$/, '')
@@ -79,9 +79,33 @@ export const useAdminStore = defineStore('admin', {
         return false
       }
     },
-    async adminFetch<T>(path: string): Promise<T> {
+    async updateRequestStatus(id: string, status: RequestStatus): Promise<ServiceRequest> {
+      const updated = await this.adminFetch<ServiceRequest>(
+        `/api/v1/admin/requests/${encodeURIComponent(id)}`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status }),
+        },
+      )
+      this.currentRequest = updated
+      const index = this.requests.findIndex((request) => request.id === id)
+      if (index !== -1) this.requests[index] = updated
+      return updated
+    },
+    async deleteRequest(id: string): Promise<void> {
+      await this.adminFetch(`/api/v1/admin/requests/${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+      })
+      this.requests = this.requests.filter((request) => request.id !== id)
+      if (this.currentRequest?.id === id) this.currentRequest = null
+    },
+    async adminFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+      const headers = new Headers(init.headers)
+      headers.set('Authorization', this.authorization)
       const response = await fetch(`${apiBaseUrl}${path}`, {
-        headers: { Authorization: this.authorization },
+        ...init,
+        headers,
       })
       const body = (await response.json().catch(() => ({}))) as T & ErrorBody
       if (!response.ok) {
@@ -96,4 +120,4 @@ export const useAdminStore = defineStore('admin', {
   },
 })
 
-export type { AdminState, RequestState, ServiceRequest } from './types'
+export type { AdminState, RequestState, RequestStatus, ServiceRequest } from './types'

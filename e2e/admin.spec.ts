@@ -32,12 +32,13 @@ test('admin signs in, inspects a request and prepares a mailto reply', async ({ 
   await expect(page.getByRole('heading', { name: 'Hizmet talepleri' })).toBeVisible()
   await page.getByLabel('Talep ara').fill(email)
 
-  const requestLink = page.getByRole('link', { name: new RegExp(`Admin Akış Testi ${email}`) })
+  const requestLink = page.getByRole('link', { name: new RegExp(email) })
   await expect(requestLink).toBeVisible()
   await requestLink.click()
 
   await expect(page.getByRole('heading', { name: 'Admin Akış Testi' })).toBeVisible()
   await expect(page.getByText('Yönetim ekranında incelenecek kalıcı test talebi.')).toBeVisible()
+  await expect(page.locator('.admin-status')).toHaveText('Okundu')
 
   await page.getByLabel('Konu').fill('Projeniz hakkında görüşme')
   await page.getByLabel('Mesaj').fill('Merhaba, talebinizi değerlendirdik. Görüşmek isteriz.')
@@ -46,4 +47,12 @@ test('admin signs in, inspects a request and prepares a mailto reply', async ({ 
     'href',
     new RegExp(`^mailto:${email}\\?subject=Projeniz%20hakk%C4%B1nda%20g%C3%B6r%C3%BC%C5%9Fme&body=`),
   )
+
+  await page.getByRole('button', { name: 'Cevaplandı olarak işaretle' }).click()
+  await expect(page.locator('.admin-status')).toHaveText('Cevaplandı')
+
+  page.once('dialog', (dialog) => dialog.accept())
+  await page.getByRole('button', { name: 'Talebi sil' }).click()
+  await expect(page).toHaveURL(/\/admin\/requests$/)
+  await expect(page.getByText(email)).toHaveCount(0)
 })

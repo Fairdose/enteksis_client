@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 
-import { useAdminStore } from '~store/admin'
+import { useAdminStore, type RequestStatus } from '~store/admin'
 
 const admin = useAdminStore()
 const search = ref('')
+const statusFilter = ref<RequestStatus | 'all'>('all')
 
 const serviceLabels: Record<string, string> = {
   'web-design': 'Web tasarım',
@@ -13,14 +14,21 @@ const serviceLabels: Record<string, string> = {
   'support-maintenance': 'Destek ve bakım',
 }
 
+const statusLabels: Record<RequestStatus, string> = {
+  new: 'Yeni',
+  read: 'Okundu',
+  replied: 'Cevaplandı',
+}
+
 const filteredRequests = computed(() => {
   const query = search.value.trim().toLocaleLowerCase('tr')
-  if (!query) return admin.requests
-  return admin.requests.filter((request) =>
-    [request.name, request.email, serviceLabels[request.serviceType] || request.serviceType].some(
+  return admin.requests.filter((request) => {
+    if (statusFilter.value !== 'all' && request.status !== statusFilter.value) return false
+    if (!query) return true
+    return [request.name, request.email, serviceLabels[request.serviceType] || request.serviceType].some(
       (value) => value.toLocaleLowerCase('tr').includes(query),
-    ),
-  )
+    )
+  })
 })
 
 const dateFormatter = new Intl.DateTimeFormat('tr-TR', {
@@ -43,10 +51,21 @@ onMounted(() => {
       <span class="admin-count">{{ admin.requests.length }} talep</span>
     </div>
 
-    <label class="admin-search">
-      <span>Talep ara</span>
-      <input v-model="search" type="search" placeholder="İsim, e-posta veya hizmet" />
-    </label>
+    <div class="admin-filters">
+      <label class="admin-search">
+        <span>Talep ara</span>
+        <input v-model="search" type="search" placeholder="İsim, e-posta veya hizmet" />
+      </label>
+      <label class="admin-search">
+        <span>Durum</span>
+        <select v-model="statusFilter">
+          <option value="all">Tüm durumlar</option>
+          <option value="new">Yeni</option>
+          <option value="read">Okundu</option>
+          <option value="replied">Cevaplandı</option>
+        </select>
+      </label>
+    </div>
 
     <div v-if="admin.listState === 'loading'" class="admin-panel admin-state" role="status">
       Talepler yükleniyor…
@@ -68,7 +87,10 @@ onMounted(() => {
         :to="{ name: 'admin-request-detail', params: { id: request.id } }"
       >
         <div>
-          <strong>{{ request.name }}</strong>
+          <span class="admin-request-name">
+            <strong>{{ request.name }}</strong>
+            <span class="admin-status" :data-status="request.status">{{ statusLabels[request.status] }}</span>
+          </span>
           <span>{{ request.email }}</span>
         </div>
         <span class="admin-service">{{ serviceLabels[request.serviceType] || request.serviceType }}</span>
