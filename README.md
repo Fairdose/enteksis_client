@@ -59,22 +59,24 @@ pnpm build
 ```
 
 Playwright uçtan uca testleri gerçek Docker API ve PostgreSQL ile çalışır. Stack'i başlattıktan
-sonra Chromium'u ilk kullanımda kurup testleri çalıştırın:
+sonra üç tarayıcı motorunu ilk kullanımda kurup testleri çalıştırın:
 
 ```sh
 ./run.sh start
-pnpm exec playwright install chromium
+pnpm exec playwright install chromium firefox webkit
 set -a; source ../enteksis_backend/.env; set +a
 pnpm test:e2e
 ```
 
-Testler masaüstünde Türkçe/İngilizce dil kalıcılığını, istemci doğrulamasını, gönderim ve API
-hatası durumlarını, gerçek veritabanına başarılı kaydı; admin giriş/liste/detay/`mailto:` akışını;
-mobilde menüyü ve yatay taşmayı kapsar.
+Testler Chromium, Firefox ve WebKit masaüstünde Türkçe/İngilizce dil kalıcılığını, istemci
+doğrulamasını, gönderim ve API hatası durumlarını, gerçek veritabanına başarılı kaydı; admin
+giriş/liste/detay/`mailto:` akışını kapsar. Chromium mobil emülasyonunda menü ve yatay taşma;
+axe-core ile public sayfa ve admin girişinin WCAG A/AA kuralları ayrıca sınanır.
 
 ## Mimari kararlar
 
-- Türkçe varsayılandır; İngilizce içerik dil düğmesiyle açılır.
+- Türkçe varsayılandır; typed mesaj kataloğundaki İngilizce public ve admin içerikleri dil
+  düğmesiyle açılır. Dil tercihi iki route ağacında da korunur ve belge dili güncellenir.
 - Router domain bazlıdır. `public.route.ts`, `layout-view` named view içine `LayoutPublic`, layout
   ise `public-view` içine nested `HomeView` render eder.
 - Admin route'ları `/admin` altında nested yapıdadır. `LayoutAdmin`, `admin-view` içine giriş,
@@ -111,16 +113,25 @@ src/
 - Hatalı alanlarda `aria-invalid` ve ilişkili hata açıklamaları
 - Gönderim hatası ve başarı durumu için canlı bölgeler
 - `prefers-reduced-motion` desteği ve mobil menü
+- Public sayfa ve admin girişinde Playwright + axe-core ile otomatik WCAG A/AA kontrolü
 
 ## Bilinen eksikler
 
-- Playwright akışları Chromium masaüstü ve mobil cihaz emülasyonunda çalışır; Firefox, WebKit ve
-  piksel bazlı görsel regresyon challenge süresi nedeniyle kapsam dışıdır.
 - Windows'ta `.sh` dosyası PowerShell veya CMD tarafından doğrudan çalıştırılamaz; Git Bash ya da
   WSL kullanılmalıdır.
-- Admin girişi yerel challenge ortamında HTTP Basic kullanır. `mailto:` yanıtı varsayılan e-posta
-  uygulamasını açar; uygulama mesajın gerçekten gönderildiğini doğrulayamaz. Bu nedenle cevap durumu
-  yönetici tarafından açıkça işaretlenir.
+- Admin doğrulaması environment üzerinden sağlanan statik bilgiler ve HTTP Basic kullanır; kullanıcı
+  yönetimi, parola sıfırlama, rol bazlı yetkilendirme ve sunucu taraflı oturum sistemi yoktur.
+  Challenge kapsamını ve bütçelenemeyen operasyon yükünü büyütmemek için eklenmedi. Üretim kapsamı
+  genişletilseydi kullanıcı tablosu, hash'lenmiş parolalar, güvenli session, SMTP tabanlı parola
+  sıfırlama, reCAPTCHA ve 2FA birlikte ele alınırdı.
+- Yanıtlama `mailto:` ile varsayılan e-posta uygulamasını açar; uygulama mesajın gerçekten
+  gönderildiğini doğrulayamaz. Mevcut SMTP servisi özel altyapıda çalıştığı için bu projeye açılmadı.
+  Mailpit ile test edilebilirdi ancak sunucu güvenliği ve mTLS entegrasyonu challenge kapsamını
+  genişleteceğinden uygulanmadı; cevap durumu yönetici tarafından açıkça işaretlenir.
+- Admin panelinde istemci taraflı temel arama ve durum filtresi vardır; sunucu taraflı sayfalama ve
+  gelişmiş arama yoktur. Doğru yaklaşım beklenen veri hacmi ve arama gereksinimine göre değişeceği;
+  indeksleme, arama algoritması ve gerekirse cache katmanı için ürün kararı gerektirdiği için küçük
+  challenge veri setine spekülatif altyapı eklenmedi.
 
 Herhangi bir hazır landing page şablonu kullanılmadı. Tasarım ve uygulama bu challenge için
 sıfırdan oluşturuldu.

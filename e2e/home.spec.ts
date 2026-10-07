@@ -21,6 +21,10 @@ test('loads in Turkish and persists the selected language', async ({ page }) => 
   await page.reload()
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')
   await expect(page.getByRole('button', { name: 'Türkçe' })).toBeVisible()
+
+  await page.goto('/admin')
+  await expect(page.getByRole('heading', { name: 'Manage service requests.' })).toBeVisible()
+  await expect(page.getByLabel('Admin navigation')).toBeVisible()
 })
 
 test('validates all required fields before sending a request', async ({ page }) => {

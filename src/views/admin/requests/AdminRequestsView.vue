@@ -1,40 +1,37 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 
+import { useCopy } from '@/composables/useCopy'
 import { useAdminStore, type RequestStatus } from '~store/admin'
 
 const admin = useAdminStore()
+const { copy, locale } = useCopy()
 const search = ref('')
 const statusFilter = ref<RequestStatus | 'all'>('all')
 
-const serviceLabels: Record<string, string> = {
-  'web-design': 'Web tasarım',
-  'software-development': 'Yazılım geliştirme',
-  'digital-consulting': 'Dijital danışmanlık',
-  'support-maintenance': 'Destek ve bakım',
-}
-
-const statusLabels: Record<RequestStatus, string> = {
-  new: 'Yeni',
-  read: 'Okundu',
-  replied: 'Cevaplandı',
-}
+const serviceLabels = computed<Record<string, string>>(() =>
+  Object.fromEntries(copy.value.services.items.map((service) => [service.id, service.title])),
+)
+const statusLabels = computed<Record<RequestStatus, string>>(() => copy.value.admin.status)
 
 const filteredRequests = computed(() => {
-  const query = search.value.trim().toLocaleLowerCase('tr')
+  const query = search.value.trim().toLocaleLowerCase(locale.value)
   return admin.requests.filter((request) => {
     if (statusFilter.value !== 'all' && request.status !== statusFilter.value) return false
     if (!query) return true
-    return [request.name, request.email, serviceLabels[request.serviceType] || request.serviceType].some(
-      (value) => value.toLocaleLowerCase('tr').includes(query),
+    return [request.name, request.email, serviceLabels.value[request.serviceType] || request.serviceType].some(
+      (value) => value.toLocaleLowerCase(locale.value).includes(query),
     )
   })
 })
 
-const dateFormatter = new Intl.DateTimeFormat('tr-TR', {
-  dateStyle: 'medium',
-  timeStyle: 'short',
-})
+const dateFormatter = computed(
+  () =>
+    new Intl.DateTimeFormat(locale.value === 'tr' ? 'tr-TR' : 'en-GB', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    }),
+)
 
 onMounted(() => {
   void admin.loadRequests()
@@ -45,39 +42,39 @@ onMounted(() => {
   <section class="admin-page" aria-labelledby="requests-title">
     <div class="admin-page-heading">
       <div>
-        <p class="admin-kicker">Gelen kutusu</p>
-        <h1 id="requests-title">Hizmet talepleri</h1>
+        <p class="admin-kicker">{{ copy.admin.list.kicker }}</p>
+        <h1 id="requests-title">{{ copy.admin.list.title }}</h1>
       </div>
-      <span class="admin-count">{{ admin.requests.length }} talep</span>
+      <span class="admin-count">{{ admin.requests.length }} {{ copy.admin.list.requestCount }}</span>
     </div>
 
     <div class="admin-filters">
       <label class="admin-search">
-        <span>Talep ara</span>
-        <input v-model="search" type="search" placeholder="İsim, e-posta veya hizmet" />
+        <span>{{ copy.admin.list.search }}</span>
+        <input v-model="search" type="search" :placeholder="copy.admin.list.searchPlaceholder" />
       </label>
       <label class="admin-search">
-        <span>Durum</span>
+        <span>{{ copy.admin.list.status }}</span>
         <select v-model="statusFilter">
-          <option value="all">Tüm durumlar</option>
-          <option value="new">Yeni</option>
-          <option value="read">Okundu</option>
-          <option value="replied">Cevaplandı</option>
+          <option value="all">{{ copy.admin.list.allStatuses }}</option>
+          <option value="new">{{ copy.admin.status.new }}</option>
+          <option value="read">{{ copy.admin.status.read }}</option>
+          <option value="replied">{{ copy.admin.status.replied }}</option>
         </select>
       </label>
     </div>
 
     <div v-if="admin.listState === 'loading'" class="admin-panel admin-state" role="status">
-      Talepler yükleniyor…
+      {{ copy.admin.list.loading }}
     </div>
     <div v-else-if="admin.listState === 'error'" class="admin-panel admin-state">
       <p class="admin-alert" role="alert">{{ admin.error }}</p>
       <button class="admin-secondary-button" type="button" @click="admin.loadRequests">
-        Tekrar dene
+        {{ copy.admin.list.retry }}
       </button>
     </div>
     <div v-else-if="filteredRequests.length === 0" class="admin-panel admin-state">
-      {{ search ? 'Aramanızla eşleşen talep bulunamadı.' : 'Henüz hizmet talebi bulunmuyor.' }}
+      {{ search ? copy.admin.list.noResults : copy.admin.list.empty }}
     </div>
     <div v-else class="admin-request-list">
       <RouterLink

@@ -3,10 +3,11 @@
 ## Kullanılan araçlar
 
 - Codex: proje iskeleti, bileşenler, testler ve dokümantasyon
-- Context7: Vue, Pinia, Vue Router, persisted-state, Docker Compose ve Docker'ın Vue/nginx
-  dokümantasyon kontrolü
+- Context7: Vue, Pinia, Vue Router, persisted-state, Playwright, axe-core, Docker Compose ve
+  Docker'ın Vue/nginx dokümantasyon kontrolü
 - Vitest ve Vue Test Utils: form doğrulama, başarı ve hata durumları
-- Playwright: masaüstü/mobil tarayıcı akışları ve gerçek Docker API form kaydı
+- Playwright ve axe-core: üç masaüstü tarayıcı motoru, mobil akışlar, otomatik WCAG kontrolleri ve
+  gerçek Docker API form kaydı
 
 ## Kabul edilen ve değiştirilen öneriler
 
@@ -32,6 +33,18 @@
   ile CRUD akışına genişletildi. `mailto:` açılmasının gönderim kanıtı olmadığı özellikle korundu.
 - Admin giriş alanı e-posta semantiğine geçirildi; gerçek kimlik bilgileri test kaynaklarından
   çıkarılıp çalışma ortamından alınacak şekilde düzenlendi.
+- Yeni bir Vue I18n bağımlılığı önerisi incelendi ancak public arayüzde typed Türkçe/İngilizce mesaj
+  kataloğu, kalıcı locale store'u ve dil değiştirici zaten bulunduğu için reddedildi. Mevcut küçük
+  altyapı admin mesajlarını da kapsayacak şekilde tamamlandı; dil tercihi tüm route'larda korundu.
+- Görsel regresyon challenge kapsamı dışında bırakıldı. Buna karşılık tarayıcı uyumluluğu Chromium,
+  Firefox ve WebKit projeleriyle; otomatik erişilebilirlik axe-core WCAG A/AA taramasıyla kapsandı.
+- Kullanıcı tablosu/session/RBAC/parola sıfırlama; challenge kapsamını ve bütçelenemeyen operasyon
+  yükünü büyütmemek için uygulanmadı. Daha geniş üretim kapsamı için hash'lenmiş parola, SMTP,
+  reCAPTCHA ve 2FA birlikte tasarlanmalıydı. Özel SMTP servisi projeye açılmadı; Mailpit + mTLS ve
+  sunucu güvenliği çalışması da test kapsamını büyüteceği için `mailto:` kararı korundu.
+- Sunucu taraflı sayfalama ve gelişmiş arama, beklenen veri hacmi ve aranacak alanlar netleşmeden
+  cache/indeks/arama algoritması seçmek spekülatif olacağı için eklenmedi; küçük veri setinde mevcut
+  istemci araması ve durum filtresi korundu.
 
 ## Doğrulama kaydı
 
@@ -51,7 +64,14 @@
 - Playwright'ın yedi senaryosu; yanlış/doğru admin girişi, talep arama ve detay görüntüleme ile
   konu/gövde içeren URL-encode edilmiş `mailto:` bağlantısını da kapsayacak şekilde geçti.
 - Admin Playwright akışı kalıcı `Okundu`/`Cevaplandı` geçişini ve onay sonrası silmeyi kapsayacak
-  şekilde genişletildi; masaüstü ve mobil toplam dokuz Playwright senaryosu geçti.
+  şekilde genişletildi; masaüstü ve mobil dokuz farklı Playwright senaryosu geçti.
+- Playwright masaüstü projeleri Chromium, Firefox ve WebKit'e genişletildi; CI browser kurulumu üç
+  motoru kapsayacak şekilde güncellendi. Türkçe/İngilizce tercihinin admin route'unda da sürdüğü
+  otomatik testle doğrulandı.
+- İlk axe-core WCAG A/AA taraması süreç bölümündeki ikincil metinler ile footer metinlerinde yetersiz
+  renk kontrastı buldu. İlgili renkler AA eşiğini geçecek şekilde yükseltildi ve public sayfa ile
+  admin giriş taramaları ihlalsiz tekrarlandı. Dokuz masaüstü senaryosunun üç motor çalıştırması ve
+  iki Chromium mobil senaryosu toplam 29 başarılı tarayıcı çalıştırması oluşturdu.
 
 ## Görev dağılımı
 
