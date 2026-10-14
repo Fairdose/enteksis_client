@@ -9,14 +9,22 @@ async function openClean(page: Page, path = '/') {
 test('loads in Turkish and persists the selected language', async ({ page }) => {
   await openClean(page)
 
-  await expect(page).toHaveTitle('Ent Challange — Dijital ürün stüdyosu')
-  await expect(page.getByLabel('Ent Challange ana sayfa').first()).toContainText('ent-challange')
+  await expect(page).toHaveTitle('Enteksis — Benim Masam V0.1')
+  await expect(page.getByLabel('Enteksis ana sayfa').first()).toContainText('Enteksis')
   await expect(page.locator('html')).toHaveAttribute('lang', 'tr')
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Fikrinizi')
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('İşin gerçek durumu')
+  await expect(page.getByRole('link', { name: /Benim Masam/ }).first()).toHaveAttribute(
+    'href',
+    '/admin/masa',
+  )
+  await expect(page.getByRole('link', { name: /Ürün PDF/ }).first()).toHaveAttribute(
+    'href',
+    '/enteksis-urun-tanitimi.pdf',
+  )
 
   await page.getByRole('button', { name: 'English' }).click()
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('We turn your idea into')
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('The real state of work')
 
   await page.reload()
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')
@@ -54,7 +62,8 @@ test('shows success only after the API persists the request', async ({ page }) =
     .fill('Docker üzerindeki gerçek API ve PostgreSQL kayıt akışı testi.')
 
   const responsePromise = page.waitForResponse(
-    (response) => response.url().endsWith('/api/v1/requests') && response.request().method() === 'POST',
+    (response) =>
+      response.url().endsWith('/api/v1/requests') && response.request().method() === 'POST',
   )
   await page.getByRole('button', { name: 'Talebimi gönder' }).click()
   const response = await responsePromise

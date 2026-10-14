@@ -23,7 +23,7 @@ describe('App', () => {
 
     await router.isReady()
 
-    expect(wrapper.text()).toContain('Fikrinizi çalışan bir deneyime dönüştürüyoruz.')
+    expect(wrapper.text()).toContain('İşin gerçek durumu tek bir masada.')
     expect(wrapper.text()).toContain('Aklınızdaki projeyi anlatın.')
   })
 })

@@ -1,5 +1,18 @@
 # AI_LOG
 
+## İkinci faz — görsel açılış revizyonu (14 Ekim 2026)
+
+### Görev dağılımı ve kararlar
+
+- Üç uzman görev kullanıldı: kanonik/teklif belgelerinin görsel ve ürün brifi, Vue/CSS landing uygulaması, tarayıcı/erişilebilirlik denetimi. Ana görev sonuçları birleştirdi.
+- Hero, Benim Masam'ın görev → sorumluluk → kanıtlı teslim → inceleme değerini CSS perspektifli katmanlarla gösterir. Dekoratif örnek veriler gerçek müşteri veya canlı KPI iddiası taşımaz.
+- Hareket CSS ile sınırlıdır; sistemin azaltılmış hareket tercihi ve mobil genişlikler korunur. Ürün PDF'si, masaya giriş ve hizmet talebi bağlantıları görünür kalır.
+
+### Doğrulama
+
+- Vue typecheck, ESLint, Oxlint, dört Vitest testi ve Vite üretim derlemesi geçti.
+- Chromium/Firefox ile 320, 390, 620, 621, 900, 901 ve 1440 px genişliklerde yatay taşma ve ana eylem sınırları; azaltılmış hareket; eski hizmet talebi ve Benim Masam akışları doğrulandı. Mobil Chromium dahil 28 Playwright çalıştırması geçti. WebKit'in yerel sistem bağımlılıkları eksik olduğu için üç motorlu doğrulama CI ortamına bırakıldı.
+
 ## İkinci faz — 14 Ekim 2026
 
 ### Kullanılan araçlar ve kaynaklar
@@ -98,5 +111,5 @@
 
 ## Görev dağılımı
 
-Çalışma tek Codex oturumunda, alt ajan kullanılmadan gerçekleştirildi. Ürün ve teknik kararların
-tamamı aynı bağlam içinde gözden geçirildi.
+İlk faz çalışması tek Codex oturumunda, alt ajan kullanılmadan gerçekleştirildi. İkinci fazdaki
+açılış sayfası revizyonu yukarıdaki üç uzman görevle yürütüldü.

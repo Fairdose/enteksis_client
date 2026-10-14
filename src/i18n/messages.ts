@@ -9,27 +9,27 @@ export const messages = {
       menu: 'Menüyü aç',
     },
     hero: {
-      eyebrow: 'Dijital ürün stüdyosu',
-      titleStart: 'Fikrinizi',
-      titleAccent: 'çalışan bir deneyime',
-      titleEnd: 'dönüştürüyoruz.',
+      eyebrow: 'Enteksis · Proje ve operasyon yönetimi',
+      titleStart: 'İşin gerçek durumu',
+      titleAccent: 'tek bir masada.',
+      titleEnd: '',
       description:
-        'Stratejiden yayına; sade, hızlı ve sürdürülebilir dijital ürünleri iş hedeflerinizle birlikte tasarlıyoruz.',
-      primary: 'Projenizi anlatın',
-      secondary: 'Hizmetleri keşfedin',
-      proof: 'Küçük ekip çevikliği, kurumsal iş disiplini.',
-      metricOne: 'Uçtan uca',
-      metricOneLabel: 'ürün yaklaşımı',
-      metricTwo: 'Şeffaf',
-      metricTwoLabel: 'iletişim süreci',
-      metricThree: 'Ölçülebilir',
-      metricThreeLabel: 'iş sonuçları',
+        'Kim ne yapıyor, kimden ne bekleniyor, hangi iş gecikiyor? Benim Masam; görevleri, sorumluları, engelleri ve kanıtlı teslimleri görünür kılar.',
+      primary: "Benim Masam'a gir",
+      secondary: 'Ürün PDF’sini incele',
+      proof: 'İşi görünür kılan, kararı hızlandıran bir operasyon masası.',
+      metricOne: 'Görev',
+      metricOneLabel: 've sorumlu takibi',
+      metricTwo: 'Kanıtlı',
+      metricTwoLabel: 'teslim ve değerlendirme',
+      metricThree: 'Açık',
+      metricThreeLabel: 'engel ve karar noktaları',
     },
     services: {
-      eyebrow: 'Neler yapıyoruz?',
-      title: 'İhtiyacınıza göre şekillenen çözümler',
+      eyebrow: 'Birlikte üretelim',
+      title: 'Operasyon netliğini ürününüze taşıyalım',
       description:
-        'Hazır kalıplar yerine probleminize, ekibinize ve hedeflerinize uyan bir çalışma modeli kuruyoruz.',
+        'Benim Masam’ı ortaya çıkaran tasarım, geliştirme ve süreç yaklaşımını yeni projeleriniz için de sunuyoruz.',
       items: [
         {
           id: 'web-design',
@@ -67,7 +67,7 @@ export const messages = {
     },
     process: {
       eyebrow: 'Nasıl çalışıyoruz?',
-      title: 'Belirsizliği küçük, net adımlara ayırıyoruz.',
+      title: 'Fikirden çalışan sisteme, açık adımlarla.',
       steps: [
         {
           number: '01',
@@ -177,7 +177,7 @@ export const messages = {
       },
     },
     footer: {
-      statement: 'Daha iyi dijital deneyimler için birlikte düşünelim.',
+      statement: 'İşin durumunu görünür kılan dijital ürünler tasarlıyor ve geliştiriyoruz.',
       navigation: 'Gezinme',
       contact: 'İletişim',
       rights: 'Tüm hakları saklıdır.',
@@ -193,27 +193,27 @@ export const messages = {
       menu: 'Open menu',
     },
     hero: {
-      eyebrow: 'Digital product studio',
-      titleStart: 'We turn your idea into',
-      titleAccent: 'an experience that works',
-      titleEnd: '.',
+      eyebrow: 'Enteksis · Project and operations management',
+      titleStart: 'The real state of work',
+      titleAccent: 'on one desk.',
+      titleEnd: '',
       description:
-        'From strategy to launch, we design simple, fast and sustainable digital products around your business goals.',
-      primary: 'Tell us about your project',
-      secondary: 'Explore services',
-      proof: 'Small-team agility with enterprise discipline.',
-      metricOne: 'End-to-end',
-      metricOneLabel: 'product approach',
-      metricTwo: 'Transparent',
-      metricTwoLabel: 'communication',
-      metricThree: 'Measurable',
-      metricThreeLabel: 'business outcomes',
+        'Who is doing what, what is waiting on whom, and which work is late? Benim Masam makes tasks, ownership, blockers and evidence-backed deliveries visible.',
+      primary: 'Open Benim Masam',
+      secondary: 'View product PDF',
+      proof: 'An operations desk that makes work visible and decisions faster.',
+      metricOne: 'Tasks',
+      metricOneLabel: 'and ownership',
+      metricTwo: 'Evidence',
+      metricTwoLabel: 'and review',
+      metricThree: 'Visible',
+      metricThreeLabel: 'blockers and decisions',
     },
     services: {
-      eyebrow: 'What we do',
-      title: 'Solutions shaped around your needs',
+      eyebrow: "Let's build together",
+      title: 'Bring operational clarity to your product',
       description:
-        'Instead of templates, we build a way of working that fits your problem, team and goals.',
+        'We bring the design, development and process approach behind Benim Masam to your next project.',
       items: [
         {
           id: 'web-design',
@@ -251,7 +251,7 @@ export const messages = {
     },
     process: {
       eyebrow: 'How we work',
-      title: 'We turn uncertainty into small, clear steps.',
+      title: 'From idea to working system, in clear steps.',
       steps: [
         {
           number: '01',
@@ -361,7 +361,7 @@ export const messages = {
       },
     },
     footer: {
-      statement: "Let's think together for better digital experiences.",
+      statement: 'We design and build digital products that make work visible.',
       navigation: 'Navigation',
       contact: 'Contact',
       rights: 'All rights reserved.',
