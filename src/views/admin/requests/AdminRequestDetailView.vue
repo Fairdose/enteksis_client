@@ -67,7 +67,7 @@ watch(
     if (!id || !(await admin.loadRequest(id)) || !admin.currentRequest) return
     const service = serviceLabels.value[admin.currentRequest.serviceType] || admin.currentRequest.serviceType
     subject.value = copy.value.admin.detail.mailSubject.replace('{service}', service)
-    message.value = `${copy.value.admin.detail.mailGreeting.replace('{name}', admin.currentRequest.name)}\n\n${copy.value.admin.detail.mailThanks}\n\n\n\n${copy.value.admin.detail.mailClosing}\nEnt Challange`
+    message.value = `${copy.value.admin.detail.mailGreeting.replace('{name}', admin.currentRequest.name)}\n\n${copy.value.admin.detail.mailThanks}\n\n\n\n${copy.value.admin.detail.mailClosing}\nent-challange`
     if (admin.currentRequest.status === 'new') await setStatus('read')
   },
   { immediate: true },

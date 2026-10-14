@@ -63,7 +63,7 @@ const people = ref<Person[]>([])
 const projects = ref<Person[]>([])
 const me = ref('')
 const canManage = ref(false)
-const workspace = ref('Ent Challange')
+const workspace = ref('ent-challange')
 const loading = ref(true)
 const busy = ref(false)
 const error = ref('')
@@ -908,7 +908,7 @@ onMounted(() => {
               type="email"
               required
               autocomplete="off"
-              placeholder="ayse@enteksis.com" /></label
+              placeholder="ayse@ornek.com" /></label
           ><label
             >İlk şifre<input
               v-model="personPassword"

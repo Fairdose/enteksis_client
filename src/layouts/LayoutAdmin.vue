@@ -28,7 +28,7 @@ function logout() {
 <template>
   <div class="admin-shell">
     <header class="admin-header">
-      <RouterLink class="brand" to="/" aria-label="Ent Challange ana sayfa">
+      <RouterLink class="brand" to="/" aria-label="ent-challange ana sayfa">
         <BrandMark />
         <span>ent-challange</span>
       </RouterLink>
