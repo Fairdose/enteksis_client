@@ -304,11 +304,6 @@ textarea:focus-visible {
   margin-left: 0.4rem;
   color: #93e9d9;
 }
-.hero-tertiary {
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 0.85rem;
-}
-
 .hero-art {
   position: relative;
   width: min(100%, 37rem);

@@ -15,7 +15,7 @@ export const messages = {
       titleEnd: '',
       description:
         'Kim ne yapıyor, kimden ne bekleniyor, hangi iş gecikiyor? Benim Masam; görevleri, sorumluları, engelleri ve kanıtlı teslimleri görünür kılar.',
-      primary: "Benim Masam'a gir",
+      primary: 'Projenizi konuşalım',
       secondary: 'Ürün PDF’sini incele',
       proof: 'İşi görünür kılan, kararı hızlandıran bir operasyon masası.',
       metricOne: 'Görev',
@@ -199,7 +199,7 @@ export const messages = {
       titleEnd: '',
       description:
         'Who is doing what, what is waiting on whom, and which work is late? Benim Masam makes tasks, ownership, blockers and evidence-backed deliveries visible.',
-      primary: 'Open Benim Masam',
+      primary: 'Tell us about your project',
       secondary: 'View product PDF',
       proof: 'An operations desk that makes work visible and decisions faster.',
       metricOne: 'Tasks',

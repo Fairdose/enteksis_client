@@ -44,7 +44,6 @@ function closeMenu() {
         <a href="/ent-challange-urun-tanitimi.pdf" target="_blank" rel="noopener" @click="closeMenu"
           >Ürün PDF</a
         >
-        <a href="/admin/masa" @click="closeMenu">Benim Masam</a>
         <LanguageSelector @change="closeMenu" />
         <a class="button button-small" href="#contact" @click="closeMenu">{{ copy.nav.cta }}</a>
       </nav>

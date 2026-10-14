@@ -13,9 +13,10 @@ test('loads in Turkish and persists the selected language', async ({ page }) => 
   await expect(page.getByLabel('ent-challange ana sayfa').first()).toContainText('ent-challange')
   await expect(page.locator('html')).toHaveAttribute('lang', 'tr')
   await expect(page.getByRole('heading', { level: 1 })).toContainText('İşin gerçek durumu')
-  await expect(page.getByRole('link', { name: /Benim Masam/ }).first()).toHaveAttribute(
+  await expect(page.locator('a[href^="/admin"]')).toHaveCount(0)
+  await expect(page.getByRole('link', { name: 'Projenizi konuşalım' }).last()).toHaveAttribute(
     'href',
-    '/admin/masa',
+    '#contact',
   )
   await expect(page.getByRole('link', { name: /Ürün PDF/ }).first()).toHaveAttribute(
     'href',

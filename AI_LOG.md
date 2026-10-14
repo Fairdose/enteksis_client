@@ -1,5 +1,11 @@
 # AI_LOG
 
+## Yönetim girişinin açık sayfadan kaldırılması (14 Ekim 2026)
+
+- Açık üst menüdeki Benim Masam bağlantısı kaldırıldı; hero'nun ana eylemi hizmet iletişim alanına yönlendirildi. Yönetim rotaları ve mevcut oturum kontrolleri korunarak `/admin` ile `/admin/masa` doğrudan URL üzerinden erişilebilir bırakıldı.
+- Türkçe/İngilizce ana eylem metinleri güncellendi; public sayfada `/admin` bağlantısı bulunmadığını ve doğrudan giriş rotasını doğrulayan tarayıcı testi uyarlandı.
+- Vue typecheck/üretim derlemesi, ESLint/Oxlint, Chromium/Firefox ana sayfa ve responsive testleri ile mobil menü kontrolü geçti; 1440 px görünüm gözle incelendi.
+
 ## Benim Masam ürün PDF'si (14 Ekim 2026)
 
 - Önceki fazın kanonik Enteksis tanıtımı uygulamanın public varlığından çıkarıldı. Yeni üç sayfalık Türkçe PDF, ent-challange Benim Masam V0.1'in çözdüğü sorunu, görevden karara örnek akışı, bugün çalışan kapsamı ve teknik dayanağı anlatır; gelecek sürüm özelliklerini mevcut ürün gibi sunmaz.

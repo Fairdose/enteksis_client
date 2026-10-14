@@ -4,12 +4,12 @@ test('hero remains usable without horizontal overflow across breakpoints', async
   await page.goto('/')
   await page.evaluate(() => window.localStorage.clear())
   await page.reload()
-  await expect(page.locator('.hero-actions a[href="/admin/masa"]')).toBeVisible()
+  await expect(page.locator('.hero-actions a.button[href="#contact"]')).toBeVisible()
 
   for (const width of [320, 390, 620, 621, 900, 901, 1440]) {
     await page.setViewportSize({ width, height: 900 })
     const layout = await page.evaluate(() => {
-      const cta = document.querySelector<HTMLAnchorElement>('.hero-actions a[href="/admin/masa"]')
+      const cta = document.querySelector<HTMLAnchorElement>('.hero-actions a.button[href="#contact"]')
       const bounds = cta?.getBoundingClientRect()
       return {
         viewport: window.innerWidth,
