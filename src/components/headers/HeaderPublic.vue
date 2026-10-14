@@ -41,7 +41,7 @@ function closeMenu() {
         <a href="#services" @click="closeMenu">{{ copy.nav.services }}</a>
         <a href="#process" @click="closeMenu">{{ copy.nav.process }}</a>
         <a href="#contact" @click="closeMenu">{{ copy.nav.contact }}</a>
-        <a href="/enteksis-urun-tanitimi.pdf" target="_blank" rel="noopener" @click="closeMenu"
+        <a href="/ent-challange-urun-tanitimi.pdf" target="_blank" rel="noopener" @click="closeMenu"
           >Ürün PDF</a
         >
         <a href="/admin/masa" @click="closeMenu">Benim Masam</a>

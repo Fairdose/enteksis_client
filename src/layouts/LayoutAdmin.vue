@@ -40,7 +40,7 @@ function logout() {
           <RouterLink v-if="admin.isAuthenticated" :to="{ name: 'admin-requests' }">{{
             copy.admin.requests
           }}</RouterLink>
-          <a href="/enteksis-urun-tanitimi.pdf" target="_blank" rel="noopener">Ürün PDF</a>
+          <a href="/ent-challange-urun-tanitimi.pdf" target="_blank" rel="noopener">Ürün PDF</a>
           <button type="button" @click="logout">{{ copy.admin.logout }}</button>
         </template>
         <LanguageSelector v-if="route.name !== 'benim-masam'" tone="light" />

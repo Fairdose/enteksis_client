@@ -33,7 +33,7 @@ bilgileri backend `.env` dosyasından alınır ve teslim kanalıyla ayrıca payl
 Admin ekranında talepler durumlarına göre filtrelenebilir; detay açıldığında `Okundu` olur,
 `Cevaplandı` olarak işaretlenebilir veya onay alınarak kalıcı biçimde silinebilir.
 
-`/admin/masa` ikinci fazın operasyon merkezidir. Yönetici ekip ve proje oluşturur, görevi sahip/sorumlu/inceleyen atamalarıyla açar. Her ekip üyesi kendi e-posta ve şifresiyle giriş yapar; gecikenler, engelliler, bugün son gün, bana atananlar, incelemem gerekenler, sahibi olduklarım, başkasından beklediklerim ve katkı verdiklerim gruplarını görür. Görev çekmecesinden kontrol listesi, katılımcı, engel, kanıtlı teslim, inceleme ve yeniden atama yürütülür. PDF bağlantısı açık üst menüde ve masada bulunur.
+`/admin/masa` ikinci fazın operasyon merkezidir. Yönetici ekip ve proje oluşturur, görevi sahip/sorumlu/inceleyen atamalarıyla açar. Her ekip üyesi kendi e-posta ve şifresiyle giriş yapar; gecikenler, engelliler, bugün son gün, bana atananlar, incelemem gerekenler, sahibi olduklarım, başkasından beklediklerim ve katkı verdiklerim gruplarını görür. Görev çekmecesinden kontrol listesi, katılımcı, engel, kanıtlı teslim, inceleme ve yeniden atama yürütülür. [Güncel ürün PDF'si](public/ent-challange-urun-tanitimi.pdf) açık üst menüde ve masada bulunur.
 
 Script her iki repoda da aynı içeriktedir ve aynı Compose projesini yönetir:
 

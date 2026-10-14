@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 import { adminCredentials } from './support/admin'
 
 test('Benim Masam görev akışı ve ürün PDF bağlantısı çalışır', async ({ page, request }) => {
-  const pdf = await request.get('/enteksis-urun-tanitimi.pdf')
+  const pdf = await request.get('/ent-challange-urun-tanitimi.pdf')
   expect(pdf.status()).toBe(200)
   expect(pdf.headers()['content-type']).toContain('application/pdf')
 

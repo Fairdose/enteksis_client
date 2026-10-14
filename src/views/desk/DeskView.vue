@@ -421,7 +421,7 @@ onMounted(() => {
         <p class="desk-subtitle">İşin sahibi, teslimi ve bekleyen kararlar tek yerde.</p>
       </div>
       <div class="desk-heading-actions">
-        <a class="desk-text-link" href="/enteksis-urun-tanitimi.pdf" target="_blank" rel="noopener"
+        <a class="desk-text-link" href="/ent-challange-urun-tanitimi.pdf" target="_blank" rel="noopener"
           >Ürün tanıtımı <span aria-hidden="true">↗</span></a
         >
         <button
@@ -582,7 +582,7 @@ onMounted(() => {
             <span>01 / V0.1</span>
             <h3>Net sahiplik.<br />Görünür ilerleme.</h3>
             <p>Her görevde tek sahip, aktif sorumlu ve değişmez teslim geçmişi.</p>
-            <a href="/enteksis-urun-tanitimi.pdf" target="_blank" rel="noopener"
+            <a href="/ent-challange-urun-tanitimi.pdf" target="_blank" rel="noopener"
               >Ürün yaklaşımını incele ↗</a
             >
           </div>

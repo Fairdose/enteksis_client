@@ -18,7 +18,7 @@ const { copy } = useCopy()
         <p class="hero-description">{{ copy.hero.description }}</p>
         <div class="hero-actions">
           <a class="button" href="/admin/masa">{{ copy.hero.primary }} <span>↗</span></a>
-          <a class="text-link" href="/enteksis-urun-tanitimi.pdf" target="_blank" rel="noopener">
+          <a class="text-link" href="/ent-challange-urun-tanitimi.pdf" target="_blank" rel="noopener">
             {{ copy.hero.secondary }} <span>↗</span>
           </a>
           <a class="text-link hero-tertiary" href="#contact">{{ copy.nav.cta }} <span>↓</span></a>

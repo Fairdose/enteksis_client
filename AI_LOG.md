@@ -1,5 +1,10 @@
 # AI_LOG
 
+## Benim Masam ürün PDF'si (14 Ekim 2026)
+
+- Önceki fazın kanonik Enteksis tanıtımı uygulamanın public varlığından çıkarıldı. Yeni üç sayfalık Türkçe PDF, ent-challange Benim Masam V0.1'in çözdüğü sorunu, görevden karara örnek akışı, bugün çalışan kapsamı ve teknik dayanağı anlatır; gelecek sürüm özelliklerini mevcut ürün gibi sunmaz.
+- Public başlık, hero ve masa bağlantıları yeni PDF adına taşındı. PDF sayfaları render edilip metin taşması görsel olarak düzeltildi; Playwright erişim kontrolleri yeni URL'ye uyarlandı.
+
 ## Marka ve dil seçici düzeltmesi (14 Ekim 2026)
 
 - Kullanıcı isteğiyle görünür marka, başlık ve açıklama `ent-challange` adına döndü. Kanonik PDF içeriği kaynak belge olarak korundu.

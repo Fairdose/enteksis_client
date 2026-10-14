@@ -19,7 +19,7 @@ test('loads in Turkish and persists the selected language', async ({ page }) => 
   )
   await expect(page.getByRole('link', { name: /Ürün PDF/ }).first()).toHaveAttribute(
     'href',
-    '/enteksis-urun-tanitimi.pdf',
+    '/ent-challange-urun-tanitimi.pdf',
   )
 
   const language = page.getByRole('combobox', { name: 'Dil seçimi' })
