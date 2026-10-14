@@ -1,6 +1,6 @@
-# Ent Challange Client
+# ent-challange Client
 
-Enteksis Benim Masam V0.1 ve önceki hizmet sayfası için Türkçe öncelikli Vue 3 istemcisi. TypeScript, Pinia ve Vue Router kullanır.
+ent-challange Benim Masam V0.1 ve önceki hizmet sayfası için Türkçe öncelikli Vue 3 istemcisi. TypeScript, Pinia ve Vue Router kullanır.
 
 ## Gereksinimler
 

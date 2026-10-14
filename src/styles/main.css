@@ -104,21 +104,57 @@ a {
 .main-nav a {
   text-decoration: none;
 }
-.main-nav > a:not(.button),
-.language-button {
+.main-nav > a:not(.button) {
   opacity: 0.76;
   transition: opacity 0.2s ease;
 }
-.main-nav > a:hover,
-.language-button:hover {
+.main-nav > a:hover {
   opacity: 1;
 }
-.language-button {
-  padding: 0;
-  border: 0;
+.language-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.7rem;
+  padding-inline: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 0.7rem;
   color: inherit;
-  background: none;
+  background: rgba(255, 255, 255, 0.07);
+  white-space: nowrap;
+}
+.language-picker-flag {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.language-picker select {
+  width: 5.2rem;
+  padding: 0.35rem 1rem 0.35rem 0;
+  appearance: none;
+  border: 0;
+  outline: none;
+  color: inherit;
+  background: transparent;
   cursor: pointer;
+}
+.language-picker select option {
+  color: var(--ink);
+  background: var(--white);
+}
+.language-picker select:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+.language-picker-chevron {
+  margin-left: -1rem;
+  pointer-events: none;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.language-picker--light {
+  border-color: var(--line);
+  color: var(--ink);
+  background: var(--paper-light);
 }
 .menu-button {
   display: none;
@@ -1393,10 +1429,15 @@ textarea:focus-visible {
   .main-nav.open {
     display: flex;
   }
-  .main-nav > a:not(.button),
-  .language-button {
+  .main-nav > a:not(.button) {
     padding: 0.9rem;
     text-align: left;
+  }
+  .main-nav .language-picker {
+    width: 100%;
+    color: var(--ink);
+    border-color: var(--line);
+    background: var(--paper-light);
   }
   .main-nav .button {
     margin-top: 0.5rem;

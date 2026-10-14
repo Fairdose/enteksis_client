@@ -9,7 +9,7 @@ export const messages = {
       menu: 'Menüyü aç',
     },
     hero: {
-      eyebrow: 'Enteksis · Proje ve operasyon yönetimi',
+      eyebrow: 'ent-challange · Proje ve operasyon yönetimi',
       titleStart: 'İşin gerçek durumu',
       titleAccent: 'tek bir masada.',
       titleEnd: '',
@@ -193,7 +193,7 @@ export const messages = {
       menu: 'Open menu',
     },
     hero: {
-      eyebrow: 'Enteksis · Project and operations management',
+      eyebrow: 'ent-challange · Project and operations management',
       titleStart: 'The real state of work',
       titleAccent: 'on one desk.',
       titleEnd: '',

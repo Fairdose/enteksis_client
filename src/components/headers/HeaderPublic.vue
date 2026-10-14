@@ -2,17 +2,11 @@
 import { ref } from 'vue'
 
 import BrandMark from '~components/brand/BrandMark.vue'
+import LanguageSelector from '~components/controls/LanguageSelector.vue'
 import { useCopy } from '@/composables/useCopy'
-import { usePreferencesStore, type Locale } from '~store/preferences'
 
-const { copy, locale } = useCopy()
-const preferences = usePreferencesStore()
+const { copy } = useCopy()
 const menuOpen = ref(false)
-
-function toggleLocale() {
-  preferences.locale = (locale.value === 'tr' ? 'en' : 'tr') as Locale
-  menuOpen.value = false
-}
 
 function closeMenu() {
   menuOpen.value = false
@@ -22,9 +16,9 @@ function closeMenu() {
 <template>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Enteksis ana sayfa" @click="closeMenu">
+      <a class="brand" href="#top" aria-label="ent-challange ana sayfa" @click="closeMenu">
         <BrandMark />
-        <span>Enteksis</span>
+        <span>ent-challange</span>
       </a>
 
       <button
@@ -51,9 +45,7 @@ function closeMenu() {
           >Ürün PDF</a
         >
         <a href="/admin/masa" @click="closeMenu">Benim Masam</a>
-        <button class="language-button" type="button" @click="toggleLocale">
-          {{ copy.nav.language }}
-        </button>
+        <LanguageSelector @change="closeMenu" />
         <a class="button button-small" href="#contact" @click="closeMenu">{{ copy.nav.cta }}</a>
       </nav>
     </div>

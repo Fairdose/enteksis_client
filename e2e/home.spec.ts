@@ -9,8 +9,8 @@ async function openClean(page: Page, path = '/') {
 test('loads in Turkish and persists the selected language', async ({ page }) => {
   await openClean(page)
 
-  await expect(page).toHaveTitle('Enteksis — Benim Masam V0.1')
-  await expect(page.getByLabel('Enteksis ana sayfa').first()).toContainText('Enteksis')
+  await expect(page).toHaveTitle('ent-challange — Benim Masam V0.1')
+  await expect(page.getByLabel('ent-challange ana sayfa').first()).toContainText('ent-challange')
   await expect(page.locator('html')).toHaveAttribute('lang', 'tr')
   await expect(page.getByRole('heading', { level: 1 })).toContainText('İşin gerçek durumu')
   await expect(page.getByRole('link', { name: /Benim Masam/ }).first()).toHaveAttribute(
@@ -22,17 +22,22 @@ test('loads in Turkish and persists the selected language', async ({ page }) => 
     '/enteksis-urun-tanitimi.pdf',
   )
 
-  await page.getByRole('button', { name: 'English' }).click()
+  const language = page.getByRole('combobox', { name: 'Dil seçimi' })
+  await expect(language).toHaveValue('tr')
+  await expect(page.locator('.language-picker-flag')).toHaveText('🇹🇷')
+  await language.selectOption('en')
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await expect(page.locator('.language-picker-flag')).toHaveText('🇬🇧')
   await expect(page.getByRole('heading', { level: 1 })).toContainText('The real state of work')
 
   await page.reload()
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')
-  await expect(page.getByRole('button', { name: 'Türkçe' })).toBeVisible()
+  await expect(page.getByRole('combobox', { name: 'Select language' })).toHaveValue('en')
 
   await page.goto('/admin')
   await expect(page.getByRole('heading', { name: 'Manage service requests.' })).toBeVisible()
   await expect(page.getByLabel('Admin navigation')).toBeVisible()
+  await expect(page.getByRole('combobox', { name: 'Select language' })).toHaveValue('en')
 })
 
 test('validates all required fields before sending a request', async ({ page }) => {

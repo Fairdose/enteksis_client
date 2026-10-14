@@ -1,5 +1,11 @@
 # AI_LOG
 
+## Marka ve dil seçici düzeltmesi (14 Ekim 2026)
+
+- Kullanıcı isteğiyle görünür marka, başlık ve açıklama `ent-challange` adına döndü. Kanonik PDF içeriği kaynak belge olarak korundu.
+- Açılış ve yönetim başlığında ortak `LanguageSelector` native açılır seçicisi kullanıldı; geçerli dilin bayrağı görünür, Türkçe/English seçenekleri klavye ve ekran okuyucu ile erişilebilir. Tercih mevcut Pinia kalıcılığından okunur.
+- Vue typecheck/lint, dört Vitest testi ve Vite üretim derlemesi geçti. Chromium/Firefox üzerinde dil tercihi kalıcılığı, axe erişilebilirlik ve responsive görünümü kapsayan 10 hedefli Playwright çalıştırması geçti; 390 px mobil menüde bayraklı kontrol görsel olarak denetlendi.
+
 ## İkinci faz — görsel açılış revizyonu (14 Ekim 2026)
 
 ### Görev dağılımı ve kararlar
