@@ -809,6 +809,19 @@ textarea:focus-visible {
   align-items: center;
   gap: 1.5rem;
 }
+@media (max-width: 760px) {
+  .admin-header {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding-block: 0.8rem;
+  }
+  .admin-header nav {
+    width: 100%;
+    overflow-x: auto;
+    gap: 1rem;
+    white-space: nowrap;
+  }
+}
 .admin-header nav a {
   font-weight: 700;
   text-decoration: none;
@@ -826,6 +839,10 @@ textarea:focus-visible {
   width: min(100% - 2.5rem, 1180px);
   margin-inline: auto;
   padding-block: clamp(3rem, 7vw, 6rem);
+}
+.admin-main:has(.desk-page) {
+  width: min(100% - 2.5rem, 1360px);
+  padding-block: clamp(1.5rem, 3vw, 3rem);
 }
 .admin-login {
   display: grid;

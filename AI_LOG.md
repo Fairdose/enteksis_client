@@ -1,5 +1,26 @@
 # AI_LOG
 
+## İkinci faz — 14 Ekim 2026
+
+### Kullanılan araçlar ve kaynaklar
+
+- Codex: Benim Masam görünümü, oturum store'u, görev çekmecesi, form/eylem akışları, responsive stil ve test.
+- Context7: Vue `script setup`, reactivity ve liste render belgeleri.
+- Playwright/Chromium: gerçek API ile giriş, proje/görev oluşturma, durum ilerletme, PDF `application/pdf` yanıtı ve 390 px mobil yatay taşma kontrolü. Görseller masaüstü/mobil olarak gözle incelendi.
+
+### Teknik kararlar
+
+- Eski hizmet sayfası ve talep admin'i korundu; Benim Masam `/admin/masa` altında ayrı Bearer oturumuyla açıldı. İşlem düğmeleri yalnız API `allowed_actions` verisine göre görünür, sunucu her mutasyonda yetkiyi yeniden sınar.
+- Sekiz masa grubu tek API yanıtından yüklenir. Masaüstünde alarm/iş akışı/sahiplik düzeni, mobilde kayan alarm şeridi ve tam genişlik görev çekmecesi kullanılır.
+- Kanonik Türkçe `ENTEKSIS_Urun_Tanitimi.pdf`, baytları değiştirilmeden public asset'e kopyalanıp açık sayfadan ve masadan bağlandı.
+- Hata, boş ve yüklenme durumları ayrı gösterilir; işlem hataları çekmece açıkken çekmecede görünür. `Idempotency-Key` her yeni mutasyonda rastgele UUID olarak üretilir.
+
+### Doğrulama
+
+- Vue typecheck, ESLint, Oxlint, dört Vitest testi, production build ve gerçek PostgreSQL'e karşı Chromium/Firefox Playwright Benim Masam testleri geçti. Yerel WebKit sistem bağımlılıkları eksik; CI kurulumu bu motoru kapsıyor.
+- Mobil 390 px görünümde belge genişliği 390 px ölçüldü; yatay taşma giderildi.
+
+
 ## Kullanılan araçlar
 
 - Codex: proje iskeleti, bileşenler, testler ve dokümantasyon
@@ -38,10 +59,9 @@
   altyapı admin mesajlarını da kapsayacak şekilde tamamlandı; dil tercihi tüm route'larda korundu.
 - Görsel regresyon challenge kapsamı dışında bırakıldı. Buna karşılık tarayıcı uyumluluğu Chromium,
   Firefox ve WebKit projeleriyle; otomatik erişilebilirlik axe-core WCAG A/AA taramasıyla kapsandı.
-- Kullanıcı tablosu/session/RBAC/parola sıfırlama; challenge kapsamını ve bütçelenemeyen operasyon
-  yükünü büyütmemek için uygulanmadı. Daha geniş üretim kapsamı için hash'lenmiş parola, SMTP,
-  reCAPTCHA ve 2FA birlikte tasarlanmalıydı. Özel SMTP servisi projeye açılmadı; Mailpit + mTLS ve
-  sunucu güvenliği çalışması da test kapsamını büyüteceği için `mailto:` kararı korundu.
+- İlk fazda kullanıcı oturumu yoktu. İkinci fazda Benim Masam için Bearer oturumu ve sunucu taraflı
+  görev yetkileri eklendi. Self servis parola sıfırlama ve 2FA kapsam dışında; eski hizmet talebi
+  yanıtında `mailto:` kararı korundu.
 - Sunucu taraflı sayfalama ve gelişmiş arama, beklenen veri hacmi ve aranacak alanlar netleşmeden
   cache/indeks/arama algoritması seçmek spekülatif olacağı için eklenmedi; küçük veri setinde mevcut
   istemci araması ve durum filtresi korundu.

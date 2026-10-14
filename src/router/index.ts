@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import * as route from './routes/_entry'
 import { adminSessionKey } from '~store/admin'
+import { deskSessionKey } from '~store/desk'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,9 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   if (to.meta.requiresAdmin && !window.sessionStorage.getItem(adminSessionKey)) {
+    return { name: 'admin-login', query: { redirect: to.fullPath } }
+  }
+  if (to.meta.requiresDesk && !window.sessionStorage.getItem(deskSessionKey)) {
     return { name: 'admin-login', query: { redirect: to.fullPath } }
   }
 })

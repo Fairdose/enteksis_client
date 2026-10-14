@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { watchEffect } from 'vue'
-import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 
 import BrandMark from '~components/brand/BrandMark.vue'
 import { useCopy } from '@/composables/useCopy'
 import { useAdminStore } from '~store/admin'
+import { useDeskStore } from '~store/desk'
 import { usePreferencesStore, type Locale } from '~store/preferences'
 
 const admin = useAdminStore()
+const desk = useDeskStore()
 const preferences = usePreferencesStore()
 const router = useRouter()
+const route = useRoute()
 const { copy, locale } = useCopy()
 
 watchEffect(() => {
@@ -22,6 +25,7 @@ function toggleLocale() {
 
 function logout() {
   admin.logout()
+  void desk.logout()
   void router.push({ name: 'admin-login' })
 }
 </script>
@@ -31,14 +35,16 @@ function logout() {
     <header class="admin-header">
       <RouterLink class="brand" to="/" aria-label="Ent Challange ana sayfa">
         <BrandMark />
-        <span>ent-challange</span>
+        <span>Enteksis</span>
       </RouterLink>
       <nav :aria-label="copy.admin.navigation">
-        <template v-if="admin.isAuthenticated">
-          <RouterLink :to="{ name: 'admin-requests' }">{{ copy.admin.requests }}</RouterLink>
+        <template v-if="admin.isAuthenticated || desk.isAuthenticated">
+          <RouterLink v-if="desk.isAuthenticated" :to="{ name: 'benim-masam' }">Benim Masam</RouterLink>
+          <RouterLink v-if="admin.isAuthenticated" :to="{ name: 'admin-requests' }">{{ copy.admin.requests }}</RouterLink>
+          <a href="/enteksis-urun-tanitimi.pdf" target="_blank" rel="noopener">Ürün PDF</a>
           <button type="button" @click="logout">{{ copy.admin.logout }}</button>
         </template>
-        <button type="button" @click="toggleLocale">{{ copy.nav.language }}</button>
+        <button v-if="route.name !== 'benim-masam'" type="button" @click="toggleLocale">{{ copy.nav.language }}</button>
       </nav>
     </header>
     <main id="admin-content" class="admin-main">

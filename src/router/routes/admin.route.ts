@@ -23,6 +23,14 @@ const adminRoutes: RouteRecordRaw[] = [
         },
       },
       {
+        path: 'masa',
+        name: 'benim-masam',
+        meta: { requiresDesk: true },
+        components: {
+          'admin-view': () => import('~views/desk/DeskView.vue'),
+        },
+      },
+      {
         path: 'requests/:id',
         name: 'admin-request-detail',
         meta: { requiresAdmin: true },

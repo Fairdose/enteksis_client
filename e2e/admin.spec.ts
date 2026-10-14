@@ -2,16 +2,22 @@ import { expect, test } from '@playwright/test'
 
 import { adminCredentials } from './support/admin'
 
-test('admin signs in, inspects a request and prepares a mailto reply', async ({ page, request }) => {
+test('admin signs in, inspects a request and prepares a mailto reply', async ({
+  page,
+  request,
+}) => {
   const email = `admin-flow-${Date.now()}@example.com`
-  const createResponse = await request.post('http://localhost:8080/api/v1/requests', {
-    data: {
-      name: 'Admin Akış Testi',
-      email,
-      serviceType: 'digital-consulting',
-      description: 'Yönetim ekranında incelenecek kalıcı test talebi.',
+  const createResponse = await request.post(
+    `${process.env.PLAYWRIGHT_API_BASE_URL || 'http://localhost:8080'}/api/v1/requests`,
+    {
+      data: {
+        name: 'Admin Akış Testi',
+        email,
+        serviceType: 'digital-consulting',
+        description: 'Yönetim ekranında incelenecek kalıcı test talebi.',
+      },
     },
-  })
+  )
   expect(createResponse.status()).toBe(201)
 
   await page.goto('/')
@@ -24,7 +30,7 @@ test('admin signs in, inspects a request and prepares a mailto reply', async ({ 
   await page.getByLabel('E-posta').fill('wrong@example.invalid')
   await page.getByLabel('Şifre').fill('yanlis')
   await page.getByRole('button', { name: 'Giriş yap' }).click()
-  await expect(page.getByRole('alert')).toHaveText('Yönetici erişimi gerekli.')
+  await expect(page.getByRole('alert')).toHaveText('E-posta veya şifre hatalı.')
 
   await page.getByLabel('E-posta').fill(adminCredentials.username)
   await page.getByLabel('Şifre').fill(adminCredentials.password)
@@ -47,7 +53,9 @@ test('admin signs in, inspects a request and prepares a mailto reply', async ({ 
   const replyLink = page.getByRole('link', { name: 'E-posta uygulamasını aç' })
   await expect(replyLink).toHaveAttribute(
     'href',
-    new RegExp(`^mailto:${email}\\?subject=Projeniz%20hakk%C4%B1nda%20g%C3%B6r%C3%BC%C5%9Fme&body=`),
+    new RegExp(
+      `^mailto:${email}\\?subject=Projeniz%20hakk%C4%B1nda%20g%C3%B6r%C3%BC%C5%9Fme&body=`,
+    ),
   )
 
   await page.getByRole('button', { name: 'Cevaplandı olarak işaretle' }).click()

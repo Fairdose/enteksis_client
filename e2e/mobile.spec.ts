@@ -26,20 +26,26 @@ test('mobile navigation opens without horizontal overflow', async ({ page }) => 
 
 test('admin list and detail remain usable on mobile', async ({ page, request }) => {
   const email = `admin-mobile-${Date.now()}@example.com`
-  const createResponse = await request.post('http://localhost:8080/api/v1/requests', {
-    data: {
-      name: 'Mobil Admin Testi',
-      email,
-      serviceType: 'web-design',
-      description: 'Mobil admin görünümünde incelenecek test talebi.',
+  const createResponse = await request.post(
+    `${process.env.PLAYWRIGHT_API_BASE_URL || 'http://localhost:8080'}/api/v1/requests`,
+    {
+      data: {
+        name: 'Mobil Admin Testi',
+        email,
+        serviceType: 'web-design',
+        description: 'Mobil admin görünümünde incelenecek test talebi.',
+      },
     },
-  })
+  )
   expect(createResponse.status()).toBe(201)
 
   await page.goto('/admin')
   await page.getByLabel('E-posta').fill(adminCredentials.username)
   await page.getByLabel('Şifre').fill(adminCredentials.password)
   await page.getByRole('button', { name: 'Giriş yap' }).click()
+  await expect(page).toHaveURL(/\/admin\/masa$/)
+  await page.getByRole('link', { name: 'Talepler' }).click()
+  await expect(page).toHaveURL(/\/admin\/requests$/)
   await page.getByLabel('Talep ara').fill(email)
   await page.getByRole('link', { name: new RegExp(email) }).click()
 

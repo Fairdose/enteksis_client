@@ -1,7 +1,6 @@
 # Ent Challange Client
 
-Ent Challange için Türkçe öncelikli, responsive ve erişilebilir hizmet landing page'i. Vue 3,
-TypeScript, Pinia ve Vue Router ile geliştirilmiştir.
+Enteksis Benim Masam V0.1 ve önceki hizmet sayfası için Türkçe öncelikli Vue 3 istemcisi. TypeScript, Pinia ve Vue Router kullanır.
 
 ## Gereksinimler
 
@@ -33,6 +32,8 @@ Gönderilen talepleri incelemek için `http://localhost:5173/admin` adresini aç
 bilgileri backend `.env` dosyasından alınır ve teslim kanalıyla ayrıca paylaşılır.
 Admin ekranında talepler durumlarına göre filtrelenebilir; detay açıldığında `Okundu` olur,
 `Cevaplandı` olarak işaretlenebilir veya onay alınarak kalıcı biçimde silinebilir.
+
+`/admin/masa` ikinci fazın operasyon merkezidir. Yönetici ekip ve proje oluşturur, görevi sahip/sorumlu/inceleyen atamalarıyla açar. Her ekip üyesi kendi e-posta ve şifresiyle giriş yapar; gecikenler, engelliler, bugün son gün, bana atananlar, incelemem gerekenler, sahibi olduklarım, başkasından beklediklerim ve katkı verdiklerim gruplarını görür. Görev çekmecesinden kontrol listesi, katılımcı, engel, kanıtlı teslim, inceleme ve yeniden atama yürütülür. PDF bağlantısı açık üst menüde ve masada bulunur.
 
 Script her iki repoda da aynı içeriktedir ve aynı Compose projesini yönetir:
 
@@ -71,7 +72,7 @@ pnpm test:e2e
 Testler Chromium, Firefox ve WebKit masaüstünde Türkçe/İngilizce dil kalıcılığını, istemci
 doğrulamasını, gönderim ve API hatası durumlarını, gerçek veritabanına başarılı kaydı; admin
 giriş/liste/detay/`mailto:` akışını kapsar. Chromium mobil emülasyonunda menü ve yatay taşma;
-axe-core ile public sayfa ve admin girişinin WCAG A/AA kuralları ayrıca sınanır.
+axe-core ile public sayfa ve admin girişinin WCAG A/AA kuralları ayrıca sınanır. Benim Masam testi gerçek API ile proje/görev oluşturma, durum ilerletme ve PDF erişimini doğrular.
 
 ## Mimari kararlar
 
@@ -119,11 +120,7 @@ src/
 
 - Windows'ta `.sh` dosyası PowerShell veya CMD tarafından doğrudan çalıştırılamaz; Git Bash ya da
   WSL kullanılmalıdır.
-- Admin doğrulaması environment üzerinden sağlanan statik bilgiler ve HTTP Basic kullanır; kullanıcı
-  yönetimi, parola sıfırlama, rol bazlı yetkilendirme ve sunucu taraflı oturum sistemi yoktur.
-  Challenge kapsamını ve bütçelenemeyen operasyon yükünü büyütmemek için eklenmedi. Üretim kapsamı
-  genişletilseydi kullanıcı tablosu, hash'lenmiş parolalar, güvenli session, SMTP tabanlı parola
-  sıfırlama, reCAPTCHA ve 2FA birlikte ele alınırdı.
+- Eski talep yönetimi HTTP Basic kullanır. Benim Masam'da ekip hesapları ve sunucu oturumları vardır; self servis parola sıfırlama ve ikinci faktör henüz yoktur.
 - Yanıtlama `mailto:` ile varsayılan e-posta uygulamasını açar; uygulama mesajın gerçekten
   gönderildiğini doğrulayamaz. Mevcut SMTP servisi özel altyapıda çalıştığı için bu projeye açılmadı.
   Mailpit ile test edilebilirdi ancak sunucu güvenliği ve mTLS entegrasyonu challenge kapsamını

@@ -4,8 +4,10 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { useCopy } from '@/composables/useCopy'
 import { useAdminStore } from '~store/admin'
+import { useDeskStore } from '~store/desk'
 
 const admin = useAdminStore()
+const desk = useDeskStore()
 const route = useRoute()
 const router = useRouter()
 const { copy } = useCopy()
@@ -15,11 +17,13 @@ const submitting = ref(false)
 
 async function submit() {
   submitting.value = true
-  const authenticated = await admin.login(email.value, password.value)
+  const adminAuthenticated = await admin.login(email.value, password.value)
+  const deskAuthenticated = await desk.login(email.value, password.value)
   submitting.value = false
-  if (authenticated) {
+  if (deskAuthenticated || adminAuthenticated) {
     const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : undefined
-    await router.replace(redirect || { name: 'admin-requests' })
+    const canFollowRedirect = redirect && ((redirect.startsWith('/admin/masa') && deskAuthenticated) || (redirect.startsWith('/admin/requests') && adminAuthenticated))
+    await router.replace(canFollowRedirect ? redirect : { name: deskAuthenticated ? 'benim-masam' : 'admin-requests' })
   }
 }
 </script>
@@ -54,7 +58,7 @@ async function submit() {
           required
         />
       </div>
-      <p v-if="admin.error" class="admin-alert" role="alert">{{ admin.error }}</p>
+      <p v-if="admin.error && desk.error" class="admin-alert" role="alert">{{ desk.error }}</p>
       <button class="button" type="submit" :disabled="submitting">
         {{ submitting ? copy.admin.login.checking : copy.admin.login.submit }}
       </button>
